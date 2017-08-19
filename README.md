@@ -4,5 +4,5 @@ Need to add config.json in the root directory that needs to contain the followin
 
 Ex;
 {
-    "key": "<your-key-here>"
+    "key": "&lt;your-key-here&gt;"
 }

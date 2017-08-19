@@ -1,0 +1,22 @@
+{
+  "name": "awesome-weather",
+  "version": "1.0.0",
+  "description": "A small web app that delivers weather information",
+  "main": "index.js",
+  "author": "joacim.boive@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^4",
+    "eslint-config-google": "^0.9",
+    "webpack": "^3"
+  },
+  "dependencies": {
+    "apicache": "^0.9.0",
+    "bootstrap": "^3",
+    "cors": "^2.8.4",
+    "express": "^4",
+    "loadjs": "^3.5.1",
+    "node": "^8.3.0",
+    "request": "^2.81.0"
+  }
+}

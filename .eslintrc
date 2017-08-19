@@ -1,0 +1,16 @@
+{
+  "extends": "./node_modules/eslint-config-google/index.js", //https://google.github.io/styleguide/jsguide.html
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    // disable requiring trailing commas because it might be nice to revert to
+    // being JSON at some point, and I don't want to make big changes now.
+    "comma-dangle": 0
+  }
+}

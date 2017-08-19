@@ -43,7 +43,7 @@ app.get('/api/cache/clear/:target?', (req, res) => {
     res.json(apicache.clear(req.params.target));
 });
 
-app.all('*', function (req, res) {
+app.all('*', (req, res) => {
     res.send({'error': 'Nothing to see here, please move on...'});
 });
 

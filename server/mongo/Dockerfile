@@ -1,4 +1,4 @@
-FROM mongo:3.5.11
+#FROM mongo:3.5.11
 
 # Create app directory
 #WORKDIR /usr/src/app

@@ -1,11 +1,9 @@
 'use strict';
 
-
-const config = require('./config.json');
-
 const API_ENDPOINT = 'http://api.openweathermap.org/data/2.5/forecast';
-const API_KEY = config.key;
+const API_KEY = process.env.API_KEY;
 const API_PORT = 3000;
+const MONGO_URL = 'mongodb://localhost:27017';
 
 
 const express = require('express');
@@ -18,8 +16,7 @@ const assert = require('assert');
 const app = express();
 const cache = apicache.options({
     headers: {
-        'cache-control': 'no-cache',
-        'debug': true
+        'cache-control': 'no-cache'
     }
 }).middleware;
 
@@ -34,9 +31,9 @@ Remove the particular caching for that route in case of enabling global caching.
  */
 
 
-let url = 'mongodb://localhost:27017';
-// Use connect method to connect to the Server
-mongoClient.connect(url, function(err, db) {
+assert.ok(API_KEY, 'API_KEY is missing from the environment - get yours from: https://openweathermap.org/api');
+
+mongoClient.connect(MONGO_URL, function(err, db) {
     assert.equal(null, err);
     console.log('Connected correctly to server');
 
@@ -48,7 +45,6 @@ mongoClient.connect(url, function(err, db) {
  */
 app.get('/api/query/:query', cache('10 minutes'), (req, res) => {
     // Cache requests for 10 minutes: https://openweathermap.org/appid
-
     let query = req.params.query;
     let url = `${API_ENDPOINT}?q=${query}&appid=${API_KEY}`;
 
@@ -68,5 +64,6 @@ app.get('/api/cache/clear/:target?', (req, res) => {
 app.all('*', (req, res) => {
     res.send({'error': 'Nothing to see here, move along...'});
 });
+
 
 app.listen(process.env.PORT || API_PORT);

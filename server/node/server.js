@@ -3,8 +3,13 @@
 const API_ENDPOINT = 'http://api.openweathermap.org/data/2.5/forecast';
 const API_KEY = process.env.API_KEY;
 const API_PORT = 3000;
-const MONGO_URL = 'mongodb://localhost:27017';
+const MONGO_URL = process.env.MONGO_URL ||'mongodb://mongo-server';
 
+/*
+MONGO_URL assumes you're using the Docker setup, otherwise you need to provide
+something like: 'mongodb://localhost:27017
+when starting node
+ */
 
 const express = require('express');
 const request = require('request');
@@ -31,7 +36,7 @@ Remove the particular caching for that route in case of enabling global caching.
  */
 
 
-assert.ok(API_KEY, 'API_KEY is missing from the environment - get yours from: https://openweathermap.org/api');
+assert.ok(API_KEY, 'process.env.API_KEY is missing - get yours from: https://openweathermap.org/api');
 
 mongoClient.connect(MONGO_URL, function(err, db) {
     assert.equal(null, err);
@@ -61,6 +66,7 @@ app.get('/api/cache/clear/:target?', (req, res) => {
     res.json(apicache.clear(req.params.target));
 });
 
+// Catch all
 app.all('*', (req, res) => {
     res.send({'error': 'Nothing to see here, move along...'});
 });

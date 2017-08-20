@@ -12,6 +12,8 @@ services:
   node:
     image: 'node:8.4-alpine'
     build: './node'
+# Might need dockerize, or similar, to assure that mongo is ready before node.
+# But seems to work stable during my testing (famous last words... ;)
     depends_on:
       - 'mongo-server'
     links:

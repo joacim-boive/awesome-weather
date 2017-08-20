@@ -1,13 +1,20 @@
 /* eslint-disable switch-colon-spacing */
 'use strict';
 
-const awesomeWeather = (function() {
+/* eslint-disable no-unused-vars */
+const awesomeWeather = ((() => {
     const init = () => {
+        $('#go').on('click', (e) => {
+            let obj = e.currentTarget;
+
+            query($('#query').val());
+        });
+    };
+
+    const query = (q) => {
         const PROXY = '//localhost:3000/api/query/';
 
-        let query = 'oslo,no';
-
-        let request = new Request(PROXY + query, {
+        let request = new Request(PROXY + q, {
             method: 'GET',
             mode: 'cors',
             redirect: 'follow',
@@ -32,6 +39,4 @@ const awesomeWeather = (function() {
     return {
         init: init
     };
-}());
-
-awesomeWeather.init();
+})());

@@ -1,16 +1,20 @@
 /* eslint-disable switch-colon-spacing */
 'use strict';
 
-const express = require('express');
-const request = require('request');
-const cors = require('cors');
-const apicache = require('apicache');
 
 const config = require('./config.json');
 
 const API_ENDPOINT = 'http://api.openweathermap.org/data/2.5/forecast';
 const API_KEY = config.key;
 const API_PORT = 3000;
+
+
+const express = require('express');
+const request = require('request');
+const cors = require('cors');
+const apicache = require('apicache');
+const mongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
 
 const app = express();
 const cache = apicache.options({
@@ -22,6 +26,16 @@ const cache = apicache.options({
 
 app.use(cors());
 app.use(cache());
+
+//
+// let url = 'mongodb://localhost:27017/city2';
+// // Use connect method to connect to the Server
+// mongoClient.connect(url, function(err, db) {
+//     assert.equal(null, err);
+//     console.log('Connected correctly to server');
+//
+//     db.close();
+// });
 
 /** TODO
  * Only cache successful responses
@@ -44,7 +58,7 @@ app.get('/api/cache/clear/:target?', (req, res) => {
 });
 
 app.all('*', (req, res) => {
-    res.send({'error': 'Nothing to see here, please move on...'});
+    res.send({'error': 'Nothing to see here, move along...'});
 });
 
 app.listen(process.env.PORT || API_PORT);

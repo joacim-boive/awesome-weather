@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mongo:
+    image: 'mongo:3.5'
+    #build: './mongo'
+    ports:
+        - '27017:27017'
+    volumes:
+      - './mongo/data:/data'
+
+  node:
+    image: 'node:8.4-alpine'
+    build: './node'
+    depends_on:
+      - 'mongo'
+    env_file:
+      - '.env'
+    ports:
+      - '3000:3000'
+    volumes:
+      - './node:/app'
+
+
+volumes:
+  data: {}

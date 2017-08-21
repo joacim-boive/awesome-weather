@@ -1,7 +1,9 @@
 'use strict';
 
-const awesomeWeather = ((() => {
+const awesomeWeather = (() => {
     const init = () => {
+        const PROXY = '//localhost:3000/api';
+
         const typeahead = document.getElementById('typeahead');
         const query = document.getElementById('query');
 
@@ -11,17 +13,22 @@ const awesomeWeather = ((() => {
             }
         };
 
+        // Need to do mousedown, instead of click, to prevent race condition with the blur event.
         typeahead.addEventListener('mousedown', get.bind(query));
 
         document.getElementById('go').addEventListener('click', (e) => {
+            const id = query.dataset.id;
 
+            data(PROXY + '/weather/' + id).then((result) => {
+                console.log(result);
+            });
         });
 
         query.addEventListener('keyup', (e) => {
             const search = e.currentTarget.value;
 
             if (search.length > 3) {
-                data(search).then((result) => {
+                data(PROXY + '/typeahead/' + search).then((result) => {
                     render(result, typeahead);
                 });
             }
@@ -35,16 +42,19 @@ const awesomeWeather = ((() => {
             typeahead.removeAttribute('hidden');
         });
 
-        /**TODO
-         * Blurs the event before the value is set from click on dropdown, causing a race condition
-         */
         query.addEventListener('blur', toggler);
     };
 
 
-    const data = (q) => {
-        const PROXY = '//localhost:3000/api/typeahead/';
-        const request = new Request(PROXY + q, {
+    /**
+     * Get data from API
+     * /typeahead/ - Get's available cities
+     * /weather/ - Gets the expected weather for provided id.
+     * @param url
+     * @returns {Promise.<TResult>}
+     */
+    const data = (url) => {
+        const request = new Request(url, {
             method: 'GET',
             mode: 'cors',
             redirect: 'follow',
@@ -87,6 +97,7 @@ const awesomeWeather = ((() => {
         // helpers.toggleVisible(target.parentElement);
         console.info(city);
         that.value = target.innerText;
+        that.dataset.id = city;
     };
 
 
@@ -108,6 +119,6 @@ const awesomeWeather = ((() => {
     return {
         init: init
     };
-})());
+})();
 
 awesomeWeather.init();

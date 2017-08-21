@@ -33,7 +33,7 @@ Remove the particular caching for that route in case of enabling global caching.
  * Only cache successful responses
  */
 // app.get('/api/query/:query', cache('10 minutes'), (req, res) => {
-app.get('/api/query/:query', weather.query);
+app.get('/api/weather/:query', weather.query);
 
 app.get('/api/typeahead/:query', typeahead.query);
 

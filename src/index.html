@@ -12,8 +12,11 @@
 <div class="container-fluid">
     <form>
         <fieldset>Get some weather</fieldset>
-        <label for="query">Enter Town and Country:</label>
-        <input value="" id="query" name="query" placeholder="Ex; Stockholm,SE" required aria-required>
+        <label for="query">Enter City:</label>
+        <div class="typeahead-wrapper">
+            <input value="" id="query" name="query" placeholder="Ex; Stockholm" required aria-required autocomplete="off" >
+            <ul id="typeahead"></ul>
+        </div>
         <button type="button" class="btn btn-sm btn-primary" id="go">Go</button>
         <button type="button" class="btn btn-sm btn-info" id="near-me">Near me</button>
     </form>

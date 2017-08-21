@@ -1,0 +1,15 @@
+ul{
+    padding: 0 0 0 4%;
+}
+li{
+    list-style: none;
+}
+
+.typeahead-wrapper{
+    display: inline-block;
+    position: relative;
+}
+
+.typeahead-wrapper ul{
+    position: absolute;
+}

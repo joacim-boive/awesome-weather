@@ -5,6 +5,7 @@ when starting node
  */
 
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://mongo-server/cities_db';
+const MAX_RESULTS = 10; // Max number of hits to return.
 
 const mongoose = require('mongoose');
 const schema = new mongoose.Schema(
@@ -45,7 +46,7 @@ exports.query = (req, res) => {
             });
 
             res.status(200).send(cities);
-        });
+        }).limit(MAX_RESULTS);
     } catch (err) {
         res.status(500).json({error: err.message});
     }

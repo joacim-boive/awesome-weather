@@ -1,17 +1,15 @@
-#FROM mongo:3.5.11
+FROM mongo:3.5.11
 
 # Create app directory
-#WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
-# Install app dependencies
-#COPY package.json .
-# For npm@5 or later, copy package-lock.json as well
-# COPY package.json package-lock.json .
+RUN apt-get update \
+	&& apt-get install -y wget
 
-#RUN npm install
+RUN wget http://bulk.openweathermap.org/sample/city.list.json.gz \
+    && gzip -f -d city.list.json.gz
 
-# Bundle app source
-#COPY . .
+COPY docker_entrypoint.sh .
 
-#EXPOSE 27017
-#CMD [ "npm", "start" ]
+RUN chmod +x /usr/src/app/docker_entrypoint.sh
+ENTRYPOINT ["/usr/src/app/docker_entrypoint.sh"]

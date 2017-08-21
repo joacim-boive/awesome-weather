@@ -2,12 +2,18 @@ version: '3'
 
 services:
   mongo-server:
-    image: 'mongo:3.5'
-    #build: './mongo'
+    image: 'mongo:3.5.11'
     ports:
         - '27017:27017'
     volumes:
       - './mongo/data:/data'
+
+  mongo-seed:
+      build: './mongo'
+      depends_on:
+        - 'mongo-server'
+      links:
+        - 'mongo-server'
 
   node:
     image: 'node:8.4-alpine'

@@ -1,12 +1,12 @@
-/* eslint-disable no-unused-vars */
 export {typeahead};
 
-import {conf} from '../conf';
-import {toggleVisible, data, get} from '../plugins/helpers';
+import {conf} from '../../conf';
+import {toggleVisible, data, get} from '../../plugins/helpers';
 
+import './typeahead.css';
 
 const typeahead = {};
-typeahead.init = () => {
+typeahead.init = (EE) => {
     const autosuggest = document.getElementById('typeahead');
     const query = document.getElementById('query');
 
@@ -20,7 +20,8 @@ typeahead.init = () => {
         const id = query.dataset.id;
 
         data(conf.PROXY + '/weather/' + id).then((result) => {
-            console.log(result);
+            console.log('Emmitting Data!');
+            EE.emit('weatherData', result);
         });
     });
 
@@ -50,7 +51,7 @@ typeahead.init = () => {
 
 const render = (cities, output) => {
     const html = cities.map((city) => {
-        return `<li data-id="${city.id}">${city.name}</li>`;
+        return `<li data-id="${city.id}">${city.name} ${city.country}</li>`;
     });
 
     output.innerHTML = html.join('');

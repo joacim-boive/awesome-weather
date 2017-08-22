@@ -9,7 +9,7 @@ assert.ok(API_KEY, 'process.env.API_KEY is missing - get yours from: https://ope
 exports.query = (req, res) => {
     try {
         let query = req.params.query;
-        let url = `${API_ENDPOINT}?id=${query}&appid=${API_KEY}`;
+        let url = `${API_ENDPOINT}?id=${query}&type=accurate&units=metric&appid=${API_KEY}`;
 
         req.pipe(request(url)).pipe(res);
     } catch (err) {

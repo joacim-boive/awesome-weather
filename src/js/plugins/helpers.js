@@ -1,4 +1,9 @@
-export {get, toggleVisible, data};
+export {get, toggleVisible, data, roundToTwoDecimals};
+
+
+const roundToTwoDecimals = (thisNumber, missing) => {
+    return thisNumber ? parseFloat(Math.round(thisNumber * 100) / 100).toFixed(2) : missing;
+};
 
 /**
  * Gets value from clicked element in dropdown and sets the corresponding dataset.id

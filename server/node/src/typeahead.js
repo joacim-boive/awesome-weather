@@ -40,7 +40,7 @@ exports.query = (req, res) => {
         let query = req.params.query;
         let queryName = new RegExp('\^' + query+ '.*', 'i');
 
-        City.find({'name': queryName}, {id: 1, name: 1, _id: 0}, (err, docs) => {
+        City.find({'name': queryName}, {id: 1, name: 1, country: 1, _id: 0}, (err, docs) => {
             const cities = docs.map((city) => {
                 return city._doc;
             });

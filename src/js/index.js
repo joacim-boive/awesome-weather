@@ -6,10 +6,16 @@ if (module.hot) {
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import 'css/style.css';
 
-import {typeahead} from './modules/typeahead';
+import EventEmitter from 'eventemitter3';
+
+import { typeahead } from './modules/typeahead/typeahead';
+import { table } from './modules/table/table';
 
 const init = () => {
-    typeahead.init();
+    const EE = new EventEmitter();
+
+    typeahead.init(EE);
+    table.init(EE);
 };
 
 init();

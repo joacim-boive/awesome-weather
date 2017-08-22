@@ -1,10 +1,10 @@
 .typeahead-wrapper{
-    display: inline-block;
     position: relative;
 }
 
 .typeahead-wrapper ul{
     position: absolute;
+    z-index: 3; /*Otherwise it ends up under the filter field*/
     width: 100%;
     padding: 0;
     margin: 0;
@@ -25,4 +25,13 @@
 .typeahead-wrapper li:hover{
     background: #afafaf;
     color: #f5f5f5;
+}
+
+#query{
+    /**
+    Need to override bootstrap so using ID for higher specificity.
+    Otherwise the input doesn't expand it's container, due to the added span.type-ahead
+    Needs a more clever solution - position the typeahead thru JS instead.
+     */
+    width: 100%;
 }

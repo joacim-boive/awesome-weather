@@ -32,3 +32,16 @@
     top:-4px;
     right:-5px;
 }
+
+.filter .form-group{
+    margin-bottom: 0;
+}
+
+.search{
+    /**
+    Yes, I know - no magic numbers..
+    It will have to due, for now.
+    Lining it up with the query field above.
+     */
+    min-width: 295px;
+}

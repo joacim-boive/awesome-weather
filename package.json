@@ -5,15 +5,48 @@
   "main": "index.js",
   "author": "joacim.boive@gmail.com",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joacim-boive/awesome-weather.git"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "webpack --env build --display-error-details",
+    "dev": "webpack --progress --colors --watch --env dev --display-error-details",
+    "start": "webpack-dev-server --inline --hot --env dev",
+    "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
+    "test:watch": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js"
+  },
   "devDependencies": {
-    "eslint": "^4",
-    "eslint-config-google": "^0.9",
-    "webpack": "^3"
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.1",
+    "compression-webpack-plugin": "^1.0.0",
+    "eslint": "^4.5.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "mocha": "^3.5.0",
+    "node": "^8.3.0",
+    "preload-webpack-plugin": "^2.0.0",
+    "rimraf": "^2.6.1",
+    "css-loader": "^0.28.5",
+    "style-loader": "^0.18.2",
+    "file-loader": "^0.11.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
     "bootstrap": "4.0.0-beta",
-    "chart.js": "^2.6.0",
-    "corejs-typeahead": "^1.1.1",
-    "loadjs": "^3.5.1"
+    "chart.js": "^2.6.0"
   }
 }

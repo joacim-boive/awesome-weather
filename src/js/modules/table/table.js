@@ -3,20 +3,7 @@ export {table};
 import * as hyperHTML from 'hyperhtml';
 import * as List from 'list.js';
 
-import './listjs.css';
-
-// import * as format from 'date-fns/format';
-// import {sv} from 'date-fns/locale/sv';
-
-/** TODO
- * Can't get 24h support from date-fns working
- * Ugly solution for now.
- * https://date-fns.org/
- *
- * Why use date-fns over moment.js
- * https://www.sitepoint.com/date-fns-javascript-date-library/
- * https://github.com/date-fns/date-fns/issues/275#issuecomment-264934189
- */
+import './table.css';
 
 import {roundToTwoDecimals} from '../../plugins/helpers';
 

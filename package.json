@@ -50,6 +50,7 @@
     "chart.js": "^2.6.0",
     "eventemitter3": "^2.0.3",
     "hyperhtml": "^1.2.0",
-    "list.js": "^1.5.0"
+    "list.js": "^1.5.0",
+    "moment": "^2.18.1"
   }
 }

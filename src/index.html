@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Awesome Weather 1.0</title>
     <!--Uncomment below to get bootstrap typeahead in IntelliJ IDE-->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <!--<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">-->
 </head>
 <body>
 <div class="container-fluid">
@@ -13,18 +13,19 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon">Enter City:</span>
-                <span class="typeahead-wrapper">
+                <div class="typeahead-wrapper">
                     <input value="" id="query" name="query" class="form-control" placeholder="Ex; Stockholm"
                            required
-                           aria-required
+                           aria-required="true"
                            aria-label="Enter city"
                            autocomplete="off">
                     <ul id="typeahead"></ul>
-                </span>
+                </div>
                 <span class="input-group-btn"><button id="go" class="btn btn-primary" type="button">Go!</button></span>
             </div>
         </div>
     </form>
+    <canvas id="graph"></canvas>
     <div id="table-data">
         <form class="filter">
             <div class="form-group">
@@ -39,16 +40,16 @@
             <thead class="thead-inverse">
             <tr>
                 <th>
-                    <button class="btn btn-outline-info sort" data-sort="date">Date</button>
+                    <button class="btn btn-sm btn-outline-info sort" data-sort="date" title="Click to sort">Date</button>
                 </th>
                 <th>
-                    <button class="btn btn-outline-info sort" data-sort="desc">Description</button>
+                    <button class="btn btn-sm btn-outline-info sort" data-sort="desc" title="Click to sort">Description</button>
                 </th>
                 <th>
-                    <button class="btn btn-outline-info sort" data-sort="temp">Temp ℃</button>
+                    <button class="btn btn-sm btn-outline-info sort" data-sort="temp" title="Click to sort">Temp ℃</button>
                 </th>
                 <th>
-                    <button class="btn btn-outline-info sort" data-sort="wind">Wind m/s</button>
+                    <button class="btn btn-sm btn-outline-info sort" data-sort="wind" title="Click to sort">Wind m/s</button>
                 </th>
             </tr>
             </thead>

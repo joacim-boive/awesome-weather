@@ -34,4 +34,5 @@
     Needs a more clever solution - position the typeahead thru JS instead.
      */
     width: 100%;
+    border-radius: 0;
 }

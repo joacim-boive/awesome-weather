@@ -1,6 +1,6 @@
 /* global __dirname, require, module*/
 
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
 
@@ -17,12 +17,12 @@ if (env === 'build') {
     devtool = 'source-map';
 } else {
     outputFile = FILE_NAME + '.js';
-    devtool = 'eval-source-map';
+    // devtool = 'eval-source-map';
     devtool = 'eval';
 }
 
 const config = {
-    entry: path.resolve(__dirname, 'src') + '/' + FILE_NAME + '.js',
+    entry: path.resolve(__dirname, 'src/js') + '/' + FILE_NAME + '.js',
     devtool: devtool,
     output: {
         path: path.resolve(__dirname, 'dist'),

@@ -48,6 +48,12 @@ const config = {
                 // loaders: ['style-loader', 'css-loader']
             },
             {
+                test: /\.html$/,
+                use: {
+                    loader: 'html-loader'
+                }
+            },
+            {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: 'url-loader?limit=10000&mimetype=application/font-woff',
                 query: {

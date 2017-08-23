@@ -4,6 +4,7 @@ import * as hyperHTML from 'hyperhtml';
 import * as List from 'list.js';
 
 import './table.css';
+import template from 'html-loader!./table.html';
 
 import {roundToTwoDecimals} from '../../plugins/helpers';
 
@@ -14,6 +15,10 @@ table.init = (EE) => {
 
 const render = (data) => {
     const list = data.list;
+
+    hyperHTML.bind(document.getElementById('table'))`
+        ${{html: template}}
+    `;
 
     hyperHTML.bind(document.getElementById('data'))`
         ${list.map((item) => {

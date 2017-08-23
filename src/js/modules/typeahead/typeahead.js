@@ -1,13 +1,20 @@
 export {typeahead};
 
 import {conf} from '../../conf';
+
+import * as hyperHTML from 'hyperhtml';
 import {toggleVisible, data, get} from '../../plugins/helpers';
 
 import './typeahead.css';
+import template from 'html-loader!./typeahead.html';
+
+hyperHTML.bind(document.getElementById('typeahead'))`
+        ${{html: template}}
+    `;
 
 const typeahead = {};
 typeahead.init = (EE) => {
-    const autosuggest = document.getElementById('typeahead');
+    const autosuggest = document.getElementById('autosuggest');
     const query = document.getElementById('query');
 
     const toggler = (e) => {
@@ -20,7 +27,6 @@ typeahead.init = (EE) => {
         const id = query.dataset.id;
 
         data(conf.PROXY + '/weather/' + id).then((result) => {
-            console.log('Emmitting Data!');
             EE.emit('weatherData', result);
         });
     });

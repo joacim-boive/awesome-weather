@@ -17,8 +17,7 @@ if (env === 'build') {
     devtool = 'source-map';
 } else {
     outputFile = FILE_NAME + '.js';
-    // devtool = 'eval-source-map';
-    devtool = 'eval';
+    devtool = 'eval-source-map';
 }
 
 const config = {

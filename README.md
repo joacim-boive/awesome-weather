@@ -43,7 +43,7 @@ If you plan to do any local development you need to install the dependencies for
 otherwise you may skip this step:
 
 ```
-In a terminal, from the node/server directory:
+In a terminal, from the server/node directory:
 npm install
 
 ```

@@ -1,3 +1,7 @@
+/**
+ * Handles
+ */
+
 export {query};
 
 import {conf} from '../conf';

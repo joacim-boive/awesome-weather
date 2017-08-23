@@ -1,6 +1,11 @@
 export {get, toggleVisible, data, roundToTwoDecimals};
 
-
+/**
+ * Formats the input so it's consistently two decimals
+ * @param {string|number} thisNumber - The number to be formatted
+ * @param {string} missing - The text to return if thisNumber is undefined
+ * @return {string}
+ */
 const roundToTwoDecimals = (thisNumber, missing) => {
     return thisNumber ? parseFloat(Math.round(thisNumber * 100) / 100).toFixed(2) : missing;
 };
@@ -23,6 +28,11 @@ const get = function (e) {
     that.dataset.id = city;
 };
 
+/**
+ * Sets, or removes, the attribute hidden on object
+ * Bootstrap uses this attribute to hide/show in layout.
+ * @param {object} obj - Object to toggle
+ */
 const toggleVisible = (obj) => {
     setTimeout(function() {
         obj.hasAttribute('hidden') ? obj.removeAttribute('hidden') : obj.setAttribute('hidden', 'true');

@@ -14,7 +14,7 @@
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "webpack --env build --display-error-details",
+    "build": "webpack -p --env build --display-error-details",
     "dev": "webpack --progress --colors --watch --env dev --display-error-details",
     "start": "webpack-dev-server --inline --hot --env dev",
     "test": "mocha --compilers js:babel-core/register --colors ./test/*.spec.js",
@@ -48,9 +48,9 @@
   "dependencies": {
     "bootstrap": "4.0.0-beta",
     "chart.js": "^2.6.0",
+    "date-fns": "^1.28.5",
     "eventemitter3": "^2.0.3",
     "hyperhtml": "^1.2.0",
-    "list.js": "^1.5.0",
-    "moment": "^2.18.1"
+    "list.js": "^1.5.0"
   }
 }

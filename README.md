@@ -137,6 +137,7 @@ If you run a local Node instance you need to have mongo-server running in Docker
 * [webpack](https://www.npmjs.com/package/webpack) - Just for being Awesome!
 * [bootstrap](https://getbootstrap.com/) - The latest and greatest(?) CSS framework!
 * [chart.js](https://www.npmjs.com/package/chart.js) - For all your charting needs
+* [date-fns](https://www.npmjs.com/package/date-fns) - Because it's better then moment.js!
 * [eventemitter3](https://www.npmjs.com/package/eventemitter3) - For an easy pub/sub architecture
 * [hyperhtml](https://www.npmjs.com/package/hyperhtml) - For doing that virtualdom thing simple and fast!
 * [list.js](https://www.npmjs.com/package/list.js) - It's Swedish! (and great! ;)
@@ -154,7 +155,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## TODO
 
-* Proper date formatting in the graph (read Swedish format)
 * Add NGINX to the docker setup and serve the static files thru there.
   * We could use Node, but NGINX is way faster and more efficient.
 * Add support for debugging of node under Docker.

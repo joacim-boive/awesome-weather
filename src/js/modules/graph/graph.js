@@ -1,6 +1,6 @@
 export {graph};
 
-import * as moment from 'moment';
+import { format } from 'date-fns';
 import * as Chart from 'chart.js';
 import './graph.css';
 
@@ -48,11 +48,6 @@ const sanitize = (data) => {
             },
             scales: {
                 xAxes: [{
-                    type: 'time',
-                    time: {
-                        format: 'MM-DD HH:mm',
-                        tooltipFormat: 'll HH:mm'
-                    },
                     scaleLabel: {
                         display: true,
                         labelString: 'Date'
@@ -72,7 +67,9 @@ const sanitize = (data) => {
     for (let i = 0, listLen = list.length; i <listLen; i++) {
         item = list[i];
 
-        datesetDates.push(new Date(item.dt_txt));
+        let thisDate = format(new Date(item.dt_txt), 'MM-DD HH:mm');
+
+        datesetDates.push(thisDate);
         datasetTemp.push(item.main.temp);
         datasetWind.push(item.wind.speed);
     }

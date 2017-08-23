@@ -123,6 +123,7 @@ If you run a local Node instance you need to have mongo-server running in Docker
 
 ## Built With
 
+**Backend**
 * [Nodejs](https://nodejs.org/en/) - Application Server
   * [express](https://www.npmjs.com/package/express) - For handling routes.
   * [apicache](https://www.npmjs.com/package/apicache) - Caching of API requests.
@@ -131,8 +132,16 @@ If you run a local Node instance you need to have mongo-server running in Docker
   * [mongoose](https://www.npmjs.com/package/mongoose) - To make life working with MongoDb easier.
   * [request](https://www.npmjs.com/package/request) - To create the PROXY functionality.
 * [MongoDb](https://www.mongodb.com/) - Database Server
-* [webpack](https://www.npmjs.com/package/webpack) - Just for being Awesome!
 
+**Frontend**
+* [webpack](https://www.npmjs.com/package/webpack) - Just for being Awesome!
+* [bootstrap](https://getbootstrap.com/) - The latest and greatest(?) CSS framework!
+* [chart.js](https://www.npmjs.com/package/chart.js) - For all your charting needs
+* [eventemitter3](https://www.npmjs.com/package/eventemitter3) - For an easy pub/sub architecture
+* [hyperhtml](https://www.npmjs.com/package/hyperhtml) - For doing that virtualdom thing simple and fast!
+* [list.js](https://www.npmjs.com/package/list.js) - It's Swedish! (and great! ;)
+    
+... And lots of coffee...
 
 ## Authors
 

@@ -115,9 +115,15 @@ Explain how to run the automated tests for this system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Nodejs](https://nodejs.org/en/) - Application Server
+  * [express](https://www.npmjs.com/package/express) - For handling routes.
+  * [apicache](https://www.npmjs.com/package/apicache) - Caching of API requests.
+  * [cors](https://www.npmjs.com/package/cors) - To return proper headers for CORS.
+  * [dotenv](https://www.npmjs.com/package/dotenv) - To load .env files smoothly.
+  * [mongoose](https://www.npmjs.com/package/mongoose) - To make life working with MongoDb easier.
+  * [request](https://www.npmjs.com/package/request) - To create the PROXY functionality.
+* [MongoDb](https://www.mongodb.com/) - Database Server
+* [webpack](https://www.npmjs.com/package/webpack) - Just for being Awesome!
 
 
 ## Authors
@@ -129,22 +135,17 @@ Explain how to run the automated tests for this system
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
-
-TODO
+## TODO
 
 * Add NGINX to the docker setup and serve the static files thru there.
   * We could use Node, but NGINX is way faster and more efficient.
 * Add support for debugging of node under Docker.
   * Disable API cache during debugging
-
-
-https://www.npmjs.com/package/cors
-http://mongoosejs.com/index.html
-https://github.com/Automattic/mongoose
-https://docs.mongodb.com/
+* Webpack
+  * Implement
+    * autoprefixer
+    * preload-webpack-plugin
+    * compression-webpack-plugin
+    * purecss/uncss
+    * CommonsChunkPlugin
+    * Tree-shaking

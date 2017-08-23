@@ -8,9 +8,13 @@ const dotenv = require('dotenv').config({path: './.env'}); // Read any environme
 const typeahead = require('./src/typeahead');
 const weather = require('./src/weather');
 
+/** TODO
+ * Add brotli support
+ * const https = require('https'); //Required for Brotli
+ * const shrinkRay = require('shrink-ray');
+ * @type {*|createApplication}
+ */
 const express = require('express');
-// const https = require('https'); //Required for Brotli
-// const shrinkRay = require('shrink-ray');
 const cors = require('cors');
 const apicache = require('apicache');
 
@@ -21,7 +25,6 @@ const cache = apicache.options({
     }
 }).middleware;
 
-// app.use(shrinkRay());
 app.use(cors());
 
 /*
@@ -33,9 +36,9 @@ Remove the particular caching for that route in case of enabling global caching.
  */
 
 // , cache('10 minutes'),
-app.get('/api/weather/:query', weather.query);
+app.get('/api/weather/:query', cache('10 minutes'), weather.query);
 
-app.get('/api/typeahead/:query', typeahead.query);
+app.get('/api/typeahead/:query', cache('10 minutes'), typeahead.query);
 
 
 // add route to display cache index
@@ -54,3 +57,5 @@ app.all('*', (req, res) => {
 });
 
 app.listen(process.env.PORT || API_PORT);
+
+console.info('Huston! We have liftoff!');

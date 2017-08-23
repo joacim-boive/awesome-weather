@@ -83,7 +83,7 @@ A [WebPack Dev Server](https://webpack.js.org/configuration/dev-server/#src/comp
 
 You can stop the environment using the docker-compose stop command:
 ```
-In a terminal, from anywhere:
+In a terminal, from the server-directory:
 docker-compose stop
 ```
 
@@ -95,7 +95,7 @@ docker-compose up
 
 Or, if you just wish to bring up just one of the servers:
 ```
-In a terminal, from server-directory:
+In a terminal, from the server-directory:
  
 - To bring up node:
 docker-compose up node
@@ -104,13 +104,21 @@ docker-compose up node
 docker-compose up mongo-server
 ```
 
-**Remember!**
+**Danger Will Robinson!**
+
+But, if you need to start all over with your docker images AND containers, then you can do:
+```
+In a terminal, from anywhere:
+**WARNING - Removes everything related to Docker!
+ 
+docker system prune -a
+```
 
 If you run a local Node instance you need to have mongo-server running in Docker for application to work.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+//TODO
 
 
 ## Built With

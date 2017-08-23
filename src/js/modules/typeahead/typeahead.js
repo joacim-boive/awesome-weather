@@ -6,7 +6,7 @@ import * as hyperHTML from 'hyperhtml';
 import {toggleVisible, data, get} from '../../plugins/helpers';
 
 import './typeahead.css';
-import template from 'html-loader!./typeahead.html';
+import template from './typeahead.html';
 
 hyperHTML.bind(document.getElementById('typeahead'))`
         ${{html: template}}

@@ -4,7 +4,7 @@ import * as hyperHTML from 'hyperhtml';
 import * as List from 'list.js';
 
 import './table.css';
-import template from 'html-loader!./table.html';
+import template from './table.html';
 
 import {roundToTwoDecimals} from '../../plugins/helpers';
 

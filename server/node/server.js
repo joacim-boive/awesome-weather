@@ -2,6 +2,9 @@
 
 const API_PORT = 3000;
 
+// eslint-disable-next-line no-unused-vars
+const dotenv = require('dotenv').config({path: './.env'}); // Read any environment vars from .env-file in the root
+
 const typeahead = require('./src/typeahead');
 const weather = require('./src/weather');
 
@@ -29,13 +32,10 @@ It will cause a stack overflow, as cache is specified in one of the routes alrea
 Remove the particular caching for that route in case of enabling global caching.
  */
 
-/** TODO
- * Only cache successful responses
- */
-// app.get('/api/query/:query', cache('10 minutes'), (req, res) => {
-app.get('/api/weather/:query', cache('10 minutes'), weather.query);
+// , cache('10 minutes'),
+app.get('/api/weather/:query', weather.query);
 
-app.get('/api/typeahead/:query', cache('60 minutes'), typeahead.query);
+app.get('/api/typeahead/:query', typeahead.query);
 
 
 // add route to display cache index
@@ -54,4 +54,3 @@ app.all('*', (req, res) => {
 });
 
 app.listen(process.env.PORT || API_PORT);
-// console.log(`Node is listening on address ${app.address()} and port ${app.address().port}`);

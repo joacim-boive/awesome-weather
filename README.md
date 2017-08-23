@@ -16,12 +16,10 @@ These instructions will get you a copy of the project up and running on your loc
 * [Get Yarn](https://yarnpkg.com/en/docs/install) - For package management.
   * You can use npm if your prefer, just replace the yarn command with npm instead.
 * An API key from OpenWeatherMap - [you can get that here](http://openweathermap.org/appid).
-* Create an .env-file in the server-directory.
+* Create an .env-file in the server/node-directory.
 
 ```
-/server/.env - Contains the API-key
-
-COMPOSE_PROJECT_NAME = aw1 # This can be anything, just to make life with docker easier.
+/server/node/.env - Contains the API-key
 API_KEY = put-your-api-key-here
 ```
 
@@ -45,7 +43,7 @@ If you plan to do any local development you need to install the dependencies for
 otherwise you may skip this step:
 
 ```
-In a terminal, from the server directory:
+In a terminal, from the node/server directory:
 npm install
 
 ```
@@ -136,8 +134,8 @@ TODO
 
 * Add NGINX to the docker setup and serve the static files thru there.
   * We could use Node, but NGINX is way faster and more efficient.
-* Add DEV variable for Node to not use cache for API during development.
-* Currently unable to debug Node inside Docker.
+* Add support for debugging of node under Docker.
+  * Disable API cache during debugging
 
 
 https://www.npmjs.com/package/cors

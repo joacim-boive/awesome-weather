@@ -2,7 +2,7 @@
   "name": "awesome-weather",
   "version": "1.0.0",
   "description": "A small web app that delivers weather information",
-  "main": "index.js",
+  "main": "src/js/index.js",
   "author": "joacim.boive@gmail.com",
   "license": "MIT",
   "repository": {
@@ -10,7 +10,7 @@
     "url": "https://github.com/joacim-boive/awesome-weather.git"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=8.4"
   },
   "scripts": {
     "prebuild": "rimraf dist",

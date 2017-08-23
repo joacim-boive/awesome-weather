@@ -12,7 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-* Recent version of Docker, you can[get that here](https://www.docker.com/get-docker). 
+* Recent version of Docker, you can [get that here](https://www.docker.com/get-docker). 
 * [Get Yarn](https://yarnpkg.com/en/docs/install) - For package management.
   * You can use npm if your prefer, just replace the yarn command with npm instead.
 * An API key from OpenWeatherMap - [you can get that here](http://openweathermap.org/appid).

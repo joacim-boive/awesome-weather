@@ -58,4 +58,4 @@ app.all('*', (req, res) => {
 
 app.listen(process.env.PORT || API_PORT);
 
-console.info('Huston! We have liftoff!');
+console.info('###### Huston! We have liftoff - Node is alive and kicking!');

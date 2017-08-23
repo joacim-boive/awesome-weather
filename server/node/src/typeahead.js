@@ -30,10 +30,12 @@ const City = mongoose.model('City', schema);
 // Use native promises
 mongoose.Promise = global.Promise;
 
-mongoose.connect(MONGO_URL, {
+const db = mongoose.connect(MONGO_URL, {
     useMongoClient: true
 });
 
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', console.info.bind(console, '###### mongo-server is online and ready to serve!'));
 
 exports.query = (req, res) => {
     try {

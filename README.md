@@ -154,6 +154,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## TODO
 
+* Proper date formatting in the graph (read Swedish format)
 * Add NGINX to the docker setup and serve the static files thru there.
   * We could use Node, but NGINX is way faster and more efficient.
 * Add support for debugging of node under Docker.
@@ -162,6 +163,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
   * Implement
     * build
       * is currently not uglified due to ES6
+      * output is Huge!
     * autoprefixer
     * preload-webpack-plugin
     * compression-webpack-plugin

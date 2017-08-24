@@ -18,7 +18,7 @@ typeahead.init = (EE) => {
     const query = document.getElementById('query');
 
     const toggler = (e) => {
-        if (e.srcElement.value) {
+        if (e.target.value) {
             toggleVisible(autosuggest);
         }
     };

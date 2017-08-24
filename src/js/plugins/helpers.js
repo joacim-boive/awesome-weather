@@ -19,7 +19,7 @@ const get = function (e) {
 
     // eslint-disable-next-line no-invalid-this
     const that = this;
-    const target = e.srcElement;
+    const target = e.target;
     const city = target.dataset.id;
 
     // helpers.toggleVisible(target.parentElement);

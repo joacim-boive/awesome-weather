@@ -1,5 +1,3 @@
-export {get, toggleVisible, data, roundToTwoDecimals};
-
 /**
  * Formats the input so it's consistently two decimals
  * @param {string|number} thisNumber - The number to be formatted
@@ -68,3 +66,5 @@ const data = (url) => {
         console.error(error);
     });
 };
+
+export {get, toggleVisible, data, roundToTwoDecimals};

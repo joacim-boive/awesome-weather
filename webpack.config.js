@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const env = require('yargs').argv.env;
 
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -81,6 +82,7 @@ const config = {
         extensions: ['.json', '.js']
     },
     plugins: [
+        new ProgressBarPlugin(),
         new ExtractTextPlugin('style.css'),
         new HtmlWebpackPlugin({
             template: './src/index.html'

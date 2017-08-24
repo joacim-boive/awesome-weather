@@ -5,7 +5,7 @@
  * @return {string}
  */
 const roundToTwoDecimals = (thisNumber, missing) => {
-    return thisNumber ? parseFloat(Math.round(thisNumber * 100) / 100).toFixed(2) : missin2;
+    return thisNumber ? parseFloat(Math.round(thisNumber * 100) / 100).toFixed(2) : missing;
 };
 
 /**

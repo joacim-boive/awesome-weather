@@ -1,16 +1,15 @@
 import * as helpers from './helpers';
-// import { } from './helpers';
 
 describe('helpers', () => {
     describe('roundToTwoDecimals', () => {
-        it('should return two decimals', () => {
-            console.log(helpers.roundToTwoDecimals);
-            // console.log(helpers.roundToTwoDecimals);
-            expect(helpers.roundToTwoDecimals(2, '--')).to.equal('2.00');
+        it('should always return two decimals', () => {
+            expect(helpers.roundToTwoDecimals(2, '')).to.equal('2.00');
+            expect(helpers.roundToTwoDecimals(2.1, '')).to.equal('2.10');
+            expect(helpers.roundToTwoDecimals(2.455, '')).to.equal('2.46');
         });
 
-        it('works again', () => {
-            expect('hi').to.equal('hi');
+        it('should return the second argument, if first argument is undefined', () => {
+            expect(helpers.roundToTwoDecimals(undefined, '--')).to.equal('--');
         });
     });
 });

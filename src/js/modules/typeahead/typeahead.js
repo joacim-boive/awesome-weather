@@ -8,12 +8,12 @@ import {toggleVisible, data, get} from '../../plugins/helpers';
 import './typeahead.css';
 import template from './typeahead.html';
 
-hyperHTML.bind(document.getElementById('typeahead'))`
+const typeahead = {};
+typeahead.init = (EE) => {
+    hyperHTML.bind(document.getElementById('typeahead'))`
         ${{html: template}}
     `;
 
-const typeahead = {};
-typeahead.init = (EE) => {
     const autosuggest = document.getElementById('autosuggest');
     const query = document.getElementById('query');
 

@@ -56,7 +56,7 @@
     "predeploy": "npm run build",
     "deploy": "./scripts/deploy.sh",
     "prebuild": "rimraf dist",
-    "build": "webpack --env.prod -p",
+    "build": "webpack --env.prod",
     "postbuild": "cpy favicon.ico dist",
     "prebuild:dev": "rimraf dist",
     "build:dev": "webpack --env.dev",

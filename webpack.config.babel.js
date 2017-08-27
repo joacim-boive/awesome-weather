@@ -16,7 +16,8 @@ module.exports = (env) => {
         context: resolve('src'),
         entry: './js/index/index.js',
         output: {
-            filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].js'),
+            // filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].js'),
+            filename: 'bundle.[name].[hash].js',
             path: resolve('dist'),
             pathinfo: ifNotProd()
         },
@@ -84,7 +85,13 @@ module.exports = (env) => {
                     NODE_ENV: ifProd('"production"', '"development"')
                 }
             }),
-            new UglifyJSPlugin(),
+            new UglifyJSPlugin({
+                    parallel: {
+                        cache: true
+                    },
+                    sourceMap: true
+                }
+            ),
             new BundleAnalyzerPlugin()
         ])
     };

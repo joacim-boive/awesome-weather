@@ -17,7 +17,7 @@ module.exports = (env) => {
         context: resolve('src'),
         entry: './js/index/index.js',
         output: {
-            filename: 'bundle.yarn test[name].[hash].js',
+            filename: 'bundle.[name].[hash].js',
             path: resolve('dist'),
             pathinfo: ifNotProd()
         },

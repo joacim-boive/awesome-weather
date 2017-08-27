@@ -1,7 +1,5 @@
 # Awesome Weather
 
-# Project Title
-
 Get your daily weather fix in a fast and easy to use way!
 
 

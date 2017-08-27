@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const {getIfUtils, removeEmpty} = require('webpack-config-utils');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const OfflinePlugin = require('offline-plugin/runtime').install();
@@ -35,8 +36,15 @@ module.exports = (env) => {
                 },
                 {
                     test: /\.css$/,
-                    loader: ExtractTextPlugin.extract('css-loader')
-                    // loaders: ['style-loader', 'css-loader']
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {importLoaders: 1, minimize: false, sourceMap: true}
+                            }
+                        ]
+                    })
                 },
                 {
                     test: /\.html$/,
@@ -70,6 +78,12 @@ module.exports = (env) => {
         plugins: removeEmpty([
             new ProgressBarPlugin(),
             new ExtractTextPlugin('styles.[name].[hash].css'),
+            new OptimizeCssAssetsPlugin({
+                cssProcessorOptions: {
+                    preset: 'default',
+                    map: {inline: false}
+                }
+            }),
             ifProd(new InlineManifestWebpackPlugin()),
             // ifProd(new webpack.optimize.CommonsChunkPlugin({
             //     names: ['manifest']

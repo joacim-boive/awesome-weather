@@ -5,9 +5,7 @@
       {
         "targets": {
           "browsers": [
-            "chrome >= 60",
-            "firefox >= 47",
-            "safari >= 10"
+            "chrome >= 60"
           ]
         },
         "debug": true,

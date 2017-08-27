@@ -123,7 +123,8 @@ module.exports = (env) => {
                 paths: glob.sync(`${PATHS.src}/**/*.html`, { nodir: true }),
                 verbose: true
             })),
-            ifNotProd(new BundleAnalyzerPlugin())
+            ifNotProd(new BundleAnalyzerPlugin()),
+            ifNotProd(new webpack.NamedModulesPlugin())
         ])
     };
     if (env.debug) {

@@ -5,6 +5,8 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const {getIfUtils, removeEmpty} = require('webpack-config-utils');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const OfflinePlugin = require('offline-plugin/runtime').install();
@@ -15,11 +17,13 @@ module.exports = (env) => {
         context: resolve('src'),
         entry: './js/index/index.js',
         output: {
-            filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].js'),
+            filename: 'bundle.[name].[hash].js',
             path: resolve('dist'),
             pathinfo: ifNotProd()
         },
-        devtool: ifProd('source-map', 'eval'),
+        // devtool: 'source-map', For CSS source-maps to work
+        // devtool: 'eval-source-map' for JS source-maps to work
+        devtool: env.dev ? 'eval-source-map' : 'source-map',
         module: {
             rules: [
                 {
@@ -34,8 +38,15 @@ module.exports = (env) => {
                 },
                 {
                     test: /\.css$/,
-                    loader: ExtractTextPlugin.extract('css-loader')
-                    // loaders: ['style-loader', 'css-loader']
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {importLoaders: 1, minimize: true, sourceMap: true}
+                            }
+                        ]
+                    })
                 },
                 {
                     test: /\.html$/,
@@ -67,9 +78,7 @@ module.exports = (env) => {
             ]
         },
         plugins: removeEmpty([
-            new ProgressBarPlugin(),
-            new ExtractTextPlugin(ifProd('styles.[name].[chunkhash].css', 'styles.[name].css')),
-            ifProd(new InlineManifestWebpackPlugin()),
+            // ifProd(new InlineManifestWebpackPlugin()),
             // ifProd(new webpack.optimize.CommonsChunkPlugin({
             //     names: ['manifest']
             // })),
@@ -83,12 +92,29 @@ module.exports = (env) => {
                     NODE_ENV: ifProd('"production"', '"development"')
                 }
             }),
-            new BundleAnalyzerPlugin()
+            new UglifyJSPlugin({
+                    parallel: {
+                        cache: true
+                    },
+                    sourceMap: true
+                }
+            ),
+            new OptimizeCssAssetsPlugin({
+                cssProcessorOptions: {
+                    preset: 'default',
+                    map: {inline: false}
+                }
+            }),
+            new ExtractTextPlugin('styles.[name].[hash].css'),
+            new BundleAnalyzerPlugin(),
+            new ProgressBarPlugin(),
         ])
     };
     if (env.debug) {
-        console.log(config);
         debugger // eslint-disable-line
     }
+
+    console.log(config);
+
     return config;
 };

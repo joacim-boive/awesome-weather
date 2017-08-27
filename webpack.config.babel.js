@@ -22,7 +22,7 @@ module.exports = (env) => {
             pathinfo: ifNotProd()
         },
         // devtool: 'source-map', For CSS source-maps to work
-        // devtool: 'eval-source-map' for JS source-maps to work
+        // devtool: 'eval-source-map' for JS source-maps to work - this is triggered for dev-server.
         devtool: env.dev ? 'eval-source-map' : 'source-map',
         module: {
             rules: [
@@ -106,15 +106,14 @@ module.exports = (env) => {
                 }
             }),
             new ExtractTextPlugin('styles.[name].[hash].css'),
-            new BundleAnalyzerPlugin(),
-            new ProgressBarPlugin(),
+            ifNotProd(new BundleAnalyzerPlugin()),
+            new ProgressBarPlugin()
         ])
     };
     if (env.debug) {
+        console.log(config);
         debugger // eslint-disable-line
     }
-
-    console.log(config);
 
     return config;
 };

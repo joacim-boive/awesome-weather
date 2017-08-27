@@ -21,7 +21,7 @@ module.exports = (env) => {
             path: resolve('dist'),
             pathinfo: ifNotProd()
         },
-        devtool: ifProd('source-map', 'eval'),
+        devtool: 'source-map',
         module: {
             rules: [
                 {

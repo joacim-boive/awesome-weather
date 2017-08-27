@@ -1,14 +1,25 @@
 /* eslint no-console:"off" */
-const {resolve} = require('path');
 const webpack = require('webpack');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
+// const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const {getIfUtils, removeEmpty} = require('webpack-config-utils');
+const PurifyCSSPlugin = require('purifycss-webpack');
+
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
+const {resolve} = require('path');
+const {getIfUtils, removeEmpty} = require('webpack-config-utils');
+const glob = require('glob');
+
+const PATHS = {
+    src: resolve('src'),
+    dist: resolve('dist'),
+};
+
 // const OfflinePlugin = require('offline-plugin/runtime').install();
 
 module.exports = (env) => {
@@ -78,20 +89,21 @@ module.exports = (env) => {
             ]
         },
         plugins: removeEmpty([
+            new ProgressBarPlugin(),
             // ifProd(new InlineManifestWebpackPlugin()),
             // ifProd(new webpack.optimize.CommonsChunkPlugin({
             //     names: ['manifest']
             // })),
-            new HtmlWebpackPlugin({
-                template: './index.html'
-                // inject: 'head'
-            }),
-            // new OfflinePlugin(),
             new webpack.DefinePlugin({
                 'process.env': {
                     NODE_ENV: ifProd('"production"', '"development"')
                 }
             }),
+            new HtmlWebpackPlugin({
+                template: './index.html'
+                // inject: 'head'
+            }),
+            // new OfflinePlugin(),
             new UglifyJSPlugin({
                     parallel: {
                         cache: true
@@ -106,8 +118,12 @@ module.exports = (env) => {
                 }
             }),
             new ExtractTextPlugin('styles.[name].[hash].css'),
-            ifNotProd(new BundleAnalyzerPlugin()),
-            new ProgressBarPlugin()
+            ifProd(new PurifyCSSPlugin({
+                // Give paths to parse for rules. These should be absolute!
+                paths: glob.sync(`${PATHS.src}/**/*.html`, { nodir: true }),
+                verbose: true
+            })),
+            ifNotProd(new BundleAnalyzerPlugin())
         ])
     };
     if (env.debug) {

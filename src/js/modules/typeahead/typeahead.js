@@ -17,6 +17,10 @@ typeahead.init = (EE) => {
     const autosuggest = document.getElementById('autosuggest');
     const query = document.getElementById('query');
 
+    // This is only hear to remove the placeholder LI-element.
+    // It's needed for PurifyCSS so the CSS isn't removed.
+    autosuggest.removeChild(autosuggest.firstElementChild);
+
     const toggler = (e) => {
         if (e.target.value) {
             toggleVisible(autosuggest);

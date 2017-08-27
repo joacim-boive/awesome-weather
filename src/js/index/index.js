@@ -3,14 +3,14 @@ if (module.hot) {
     module.hot.accept();
 }
 
-import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
-
 import EventEmitter from 'eventemitter3';
 
 import { typeahead } from '../modules/typeahead/typeahead';
 import { table } from '../modules/table/table';
 import { graph } from '../modules/graph/graph';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
 
 const init = () => {
     const EE = new EventEmitter();

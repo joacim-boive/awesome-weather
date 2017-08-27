@@ -8,7 +8,9 @@
                        aria-required="true"
                        aria-label="Enter city"
                        autocomplete="off">
-                <ul id="autosuggest"></ul>
+                <ul id="autosuggest">
+                    <li></li> <!-- This placeholder is necessary so classes are kept when running PurifyCSS -->
+                </ul>
             </div>
             <span class="input-group-btn"><button id="go" class="btn btn-primary" type="button">Go!</button></span>
         </div>

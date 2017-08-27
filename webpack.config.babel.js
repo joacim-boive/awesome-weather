@@ -21,9 +21,9 @@ module.exports = (env) => {
             path: resolve('dist'),
             pathinfo: ifNotProd()
         },
-        // devtool: 'source-map', // For CSS source-maps to work
-        devtool: env.dev ? 'eval-source-map' : 'source-map', // For JS source-maps to work
-        // devtool: 'eval-source-map',
+        // devtool: 'source-map', For CSS source-maps to work
+        // devtool: 'eval-source-map' for JS source-maps to work
+        devtool: env.dev ? 'eval-source-map' : 'source-map',
         module: {
             rules: [
                 {

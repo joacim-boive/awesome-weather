@@ -20,4 +20,4 @@ const init = () => {
     graph.init(EE);
 };
 
-init();
+document.addEventListener('DOMContentLoaded', init);

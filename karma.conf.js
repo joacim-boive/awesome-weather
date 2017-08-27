@@ -37,7 +37,7 @@ module.exports = (config) => {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['Firefox'],
+    browsers: ['Chrome'],
     singleRun: true,
     concurrency: Infinity,
   });

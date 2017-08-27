@@ -160,9 +160,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
   * Disable API cache during debugging
 * Webpack
   * Implement
-    * build
-      * is currently not uglified due to ES6
-      * output is Huge!
     * autoprefixer
     * preload-webpack-plugin
     * compression-webpack-plugin

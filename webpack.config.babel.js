@@ -21,7 +21,8 @@ module.exports = (env) => {
             path: resolve('dist'),
             pathinfo: ifNotProd()
         },
-        devtool: 'source-map',
+        // devtool: 'source-map', // For CSS source-maps to work
+        devtool: 'eval-source-map', // For JS source-maps to work
         module: {
             rules: [
                 {
@@ -41,7 +42,7 @@ module.exports = (env) => {
                         use: [
                             {
                                 loader: 'css-loader',
-                                options: {importLoaders: 1, minimize: false, sourceMap: true}
+                                options: {importLoaders: 1, minimize: true, sourceMap: true}
                             }
                         ]
                     })
@@ -76,15 +77,7 @@ module.exports = (env) => {
             ]
         },
         plugins: removeEmpty([
-            new ProgressBarPlugin(),
-            new ExtractTextPlugin('styles.[name].[hash].css'),
-            new OptimizeCssAssetsPlugin({
-                cssProcessorOptions: {
-                    preset: 'default',
-                    map: {inline: false}
-                }
-            }),
-            ifProd(new InlineManifestWebpackPlugin()),
+            // ifProd(new InlineManifestWebpackPlugin()),
             // ifProd(new webpack.optimize.CommonsChunkPlugin({
             //     names: ['manifest']
             // })),
@@ -101,11 +94,18 @@ module.exports = (env) => {
             new UglifyJSPlugin({
                     parallel: {
                         cache: true
-                    },
-                    sourceMap: true
+                    }
                 }
             ),
-            new BundleAnalyzerPlugin()
+            new OptimizeCssAssetsPlugin({
+                cssProcessorOptions: {
+                    preset: 'default',
+                    map: {inline: false}
+                }
+            }),
+            new ExtractTextPlugin('styles.[name].[hash].css'),
+            new BundleAnalyzerPlugin(),
+            new ProgressBarPlugin(),
         ])
     };
     if (env.debug) {

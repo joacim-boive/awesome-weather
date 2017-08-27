@@ -5,6 +5,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const {getIfUtils, removeEmpty} = require('webpack-config-utils');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const OfflinePlugin = require('offline-plugin/runtime').install();
@@ -83,6 +84,7 @@ module.exports = (env) => {
                     NODE_ENV: ifProd('"production"', '"development"')
                 }
             }),
+            new UglifyJSPlugin(),
             new BundleAnalyzerPlugin()
         ])
     };

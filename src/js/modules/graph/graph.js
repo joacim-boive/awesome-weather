@@ -1,7 +1,7 @@
 export {graph};
 
-import { format } from 'date-fns';
-import * as Chart from 'chart.js';
+import * as format from 'date-fns/format';
+import * as Chart from 'chart.js/dist/Chart';
 import './graph.css';
 
 const graph = {};

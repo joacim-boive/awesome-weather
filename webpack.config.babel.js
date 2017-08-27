@@ -16,7 +16,6 @@ module.exports = (env) => {
         context: resolve('src'),
         entry: './js/index/index.js',
         output: {
-            // filename: ifProd('bundle.[name].[chunkhash].js', 'bundle.[name].js'),
             filename: 'bundle.[name].[hash].js',
             path: resolve('dist'),
             pathinfo: ifNotProd()
@@ -70,7 +69,7 @@ module.exports = (env) => {
         },
         plugins: removeEmpty([
             new ProgressBarPlugin(),
-            new ExtractTextPlugin(ifProd('styles.[name].[chunkhash].css', 'styles.[name].css')),
+            new ExtractTextPlugin('styles.[name].[hash].css'),
             ifProd(new InlineManifestWebpackPlugin()),
             // ifProd(new webpack.optimize.CommonsChunkPlugin({
             //     names: ['manifest']

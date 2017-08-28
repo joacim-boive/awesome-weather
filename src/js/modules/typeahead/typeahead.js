@@ -1,11 +1,11 @@
 /* eslint-disable no-invalid-this */
 
-import { conf } from '../../conf';
+import {conf} from '../../conf';
 
 import * as hyperHTML from 'hyperhtml';
 
 import * as debounce from 'lodash/debounce';
-import { toggleVisible, data, get } from '../../plugins/helpers';
+import {toggleVisible, data, get} from '../../plugins/helpers';
 
 import './typeahead.css';
 import template from './typeahead.html';
@@ -27,7 +27,10 @@ typeahead.init = (EE) => {
 
     submit.addEventListener('click', debounce((event) => {
         submitQuery.apply(this, [event, EE]);
-    }, 300));
+    }, 1000, {
+        leading: true,
+        trailing: false
+    }));
     // , submitQuery.bind(this, EE));
 
 // Need to do mousedown, instead of click, to prevent race condition with the blur event.

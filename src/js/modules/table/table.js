@@ -43,4 +43,4 @@ const render = (data) => {
     });
 };
 
-export {table};
+export { table };

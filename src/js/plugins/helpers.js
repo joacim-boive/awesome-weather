@@ -62,4 +62,4 @@ const data = (url) => {
     });
 };
 
-export {get, toggleVisible, data, roundToTwoDecimals};
+export { get, toggleVisible, data, roundToTwoDecimals };

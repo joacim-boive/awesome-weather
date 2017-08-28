@@ -7,14 +7,36 @@ import './graph.css';
 const graph = {};
 graph.init = (EE) => {
     EE.on('weatherData', sanitize);
+    render.init();
 };
 
-const render = (config) => {
-    let ctx = document.getElementById('graph').getContext('2d');
+const render = ((() => {
+    let graph = null;
+    let chart = null;
 
-// eslint-disable-next-line no-unused-vars
-    const chart = new Chart(ctx, config);
-};
+    const init = () => {
+        graph = document.getElementById('graph');
+    };
+
+    const draw = (config) => {
+        /** TODO
+         * Use update instead
+         * http://www.chartjs.org/docs/latest/developers/api.html#updateduration-lazy
+         * Doesn't seem to work at the moment - nothing happens when called with new data.
+         * The below is a workaround.
+         */
+        if (chart) {
+            chart.destroy();
+        }
+
+        chart = new Chart(graph.getContext('2d'), config);
+    };
+
+    return {
+        init: init,
+        draw: draw
+    };
+})());
 
 const sanitize = (data) => {
     let datesetDates = [];
@@ -64,7 +86,7 @@ const sanitize = (data) => {
     };
 
     // Not sexy - but the most efficient! ;)
-    for (let i = 0, listLen = list.length; i <listLen; i++) {
+    for (let i = 0, listLen = list.length; i < listLen; i++) {
         item = list[i];
 
         let thisDate = format(new Date(item.dt_txt), 'MM-DD HH:mm');
@@ -74,5 +96,5 @@ const sanitize = (data) => {
         datasetWind.push(item.wind.speed);
     }
 
-    render(config);
+    render.draw(config);
 };

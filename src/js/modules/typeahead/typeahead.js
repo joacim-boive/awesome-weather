@@ -1,11 +1,11 @@
 /* eslint-disable no-invalid-this */
 
-import {conf} from '../../conf';
+import { conf } from '../../conf';
 
 import * as hyperHTML from 'hyperhtml';
 
 import * as debounce from 'lodash/debounce';
-import {toggleVisible, data, get} from '../../plugins/helpers';
+import { toggleVisible, data, get } from '../../plugins/helpers';
 
 import './typeahead.css';
 import template from './typeahead.html';
@@ -17,7 +17,7 @@ typeahead.init = (EE) => {
         ${{html: template}}
     `;
 
-    const go = document.getElementById('go');
+    const submit = document.getElementById('go');
     const autosuggest = document.getElementById('autosuggest');
     const query = document.getElementById('query');
 
@@ -25,7 +25,7 @@ typeahead.init = (EE) => {
     // It's needed for PurifyCSS so the CSS isn't removed.
     autosuggest.removeChild(autosuggest.firstElementChild);
 
-    go.addEventListener('click', submit.bind(this, EE));
+    submit.addEventListener('click', submitQuery.bind(this, EE));
 
 // Need to do mousedown, instead of click, to prevent race condition with the blur event.
     autosuggest.addEventListener('mousedown', get.bind(this, query));
@@ -48,7 +48,6 @@ const render = (cities, output) => {
     hyperHTML.bind(output)`
         ${template}
     `;
-    // output.innerHTML = html.join('');
 };
 
 const toggler = (obj) => {
@@ -74,8 +73,10 @@ const getAutosuggest = (e, obj) => {
     }
 };
 
-const submit = (EE) => {
+const submitQuery = (EE) => {
     const id = query.dataset.id;
+
+    event.preventDefault();
 
     data(conf.PROXY + '/weather/' + id).then((result) => {
         EE.emit('weatherData', result);

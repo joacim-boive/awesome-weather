@@ -59,20 +59,14 @@ const roundToTwoDecimals = (thisNumber, missing) => {
 
 /**
  * Gets value from clicked element in dropdown and sets the corresponding dataset.id
- * @param {object} e - Event that triggers function
+ * @param {object} obj - Object (input-field) to be updated with data.
  */
-const get = function (e) {
-    // Needs to be "old-school" function (not =>) to preserve this-behaviour
-
-    // eslint-disable-next-line no-invalid-this
-    const that = this;
-    const target = e.target;
+const get = (obj) => {
+    const target = event.target;
     const city = target.dataset.id;
 
-    // helpers.toggleVisible(target.parentElement);
-    console.info(city);
-    that.value = target.innerText;
-    that.dataset.id = city;
+    obj.value = target.innerText;
+    obj.dataset.id = city;
 };
 
 /**

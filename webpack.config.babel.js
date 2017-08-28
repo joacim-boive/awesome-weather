@@ -89,7 +89,6 @@ module.exports = (env) => {
             ]
         },
         plugins: removeEmpty([
-            new ProgressBarPlugin(),
             // ifProd(new InlineManifestWebpackPlugin()),
             // ifProd(new webpack.optimize.CommonsChunkPlugin({
             //     names: ['manifest']
@@ -99,6 +98,7 @@ module.exports = (env) => {
                     NODE_ENV: ifProd('"production"', '"development"')
                 }
             }),
+            new ProgressBarPlugin(),
             new HtmlWebpackPlugin({
                 template: './index.html'
                 // inject: 'head'
@@ -123,7 +123,7 @@ module.exports = (env) => {
                 paths: glob.sync(`${PATHS.src}/**/*.html`, { nodir: true }),
                 verbose: true
             })),
-            ifNotProd(new BundleAnalyzerPlugin()),
+            new BundleAnalyzerPlugin(),
             ifNotProd(new webpack.NamedModulesPlugin())
         ])
     };

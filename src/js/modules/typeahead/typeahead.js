@@ -4,7 +4,7 @@ import {conf} from '../../conf';
 
 import * as hyperHTML from 'hyperhtml';
 
-import {debounce} from 'lodash';
+import * as debounce from 'lodash/debounce';
 import {toggleVisible, data, get} from '../../plugins/helpers';
 
 import './typeahead.css';
@@ -32,7 +32,7 @@ typeahead.init = (EE) => {
 
     query.addEventListener('keyup', debounce((event) => {
         getAutosuggest.apply(this, [event, autosuggest]);
-    }, 400));
+    }, 300));
 
     query.addEventListener('blur', toggler.bind(this, autosuggest));
     query.addEventListener('focus', () => {
@@ -41,11 +41,14 @@ typeahead.init = (EE) => {
 };
 
 const render = (cities, output) => {
-    const html = cities.map((city) => {
+    const template = cities.map((city) => {
         return `<li data-id="${city.id}">${city.name} ${city.country}</li>`;
     });
 
-    output.innerHTML = html.join('');
+    hyperHTML.bind(output)`
+        ${template}
+    `;
+    // output.innerHTML = html.join('');
 };
 
 const toggler = (obj) => {

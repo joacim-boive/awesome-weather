@@ -3,7 +3,7 @@ export {typeahead};
 import {conf} from '../../conf';
 
 import * as hyperHTML from 'hyperhtml';
-import {toggleVisible, data, get} from '../../plugins/helpers';
+import {toggleVisible, data, get, debounce} from '../../plugins/helpers';
 
 import './typeahead.css';
 import template from './typeahead.html';
@@ -36,7 +36,7 @@ typeahead.init = (EE) => {
     });
 
 // Need to do mousedown, instead of click, to prevent race condition with the blur event.
-    autosuggest.addEventListener('mousedown', get.bind(query));
+    autosuggest.addEventListener('mousedown', debounce(get.bind(query)));
 
     query.addEventListener('keyup', (e) => {
         const search = e.currentTarget.value;

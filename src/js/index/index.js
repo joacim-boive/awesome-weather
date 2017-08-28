@@ -9,6 +9,7 @@ import { typeahead } from '../modules/typeahead/typeahead';
 import { table } from '../modules/table/table';
 import { graph } from '../modules/graph/graph';
 
+// This order is required, otherwise PurifyCSS messes up the required CSS and classes are missed
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 

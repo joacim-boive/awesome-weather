@@ -3,11 +3,12 @@
 import {conf} from '../../conf';
 
 import * as hyperHTML from 'hyperhtml';
-import {toggleVisible, data, get, debounce} from '../../plugins/helpers';
+
+import {debounce} from 'lodash';
+import {toggleVisible, data, get} from '../../plugins/helpers';
 
 import './typeahead.css';
 import template from './typeahead.html';
-
 
 const typeahead = {};
 typeahead.init = (EE) => {
@@ -29,7 +30,10 @@ typeahead.init = (EE) => {
 // Need to do mousedown, instead of click, to prevent race condition with the blur event.
     autosuggest.addEventListener('mousedown', get.bind(this, query));
 
-    query.addEventListener('keyup', getAutosuggest.bind(this, autosuggest));
+    query.addEventListener('keyup', debounce((event) => {
+        getAutosuggest.apply(this, [event, autosuggest]);
+    }, 400));
+
     query.addEventListener('blur', toggler.bind(this, autosuggest));
     query.addEventListener('focus', () => {
         autosuggest.removeAttribute('hidden');
@@ -50,13 +54,16 @@ const toggler = (obj) => {
     }
 };
 
-const getAutosuggest = (obj) => {
-    const search = event.currentTarget.value;
-
-    if (search.length > 3) {
+const getAutosuggest = (e, obj) => {
+    const search = e.target.value;
+    const getData = () => {
         data(conf.PROXY + '/typeahead/' + search).then((result) => {
             render(result, obj);
         });
+    };
+
+    if (search.length > 3) {
+        getData();
     }
 
     if (search.length < 4) {

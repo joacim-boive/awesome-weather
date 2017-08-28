@@ -1,51 +1,51 @@
-/**
- * Waits until Xms have passed before calling the function again.
- * @param {object} func - Function to debounce
- * @param {number} wait - Wait for Xms, or 300ms if not provided
- * @return {function(...[*]=)}
- */
-const debounce = (func, wait = 300) => {
-    let timeout = null;
-
-    return (...args) => {
-        clearTimeout(timeout);
-
-        timeout = setTimeout(() => {
-            timeout = null;
-// eslint-disable-next-line no-invalid-this
-            func.apply(this, args);
-        }, wait);
-    };
-};
-
-/**
- * Only call this function at most Xms
- * @param {object} func - The function to call
- * @param {number} threshold - The number of minimum ms to pass before next execution
- * @return {function(...[*]=)}
- */
-const throttle = (func, threshold = 250) => {
-    let last = null;
-    let deferTimer = null;
-
-    return (...args) => {
-        const now = +new Date();
-
-        if (last && now < last + threshold) {
-            clearTimeout(deferTimer);
-
-            deferTimer = setTimeout(() => {
-                last = now;
-// eslint-disable-next-line no-invalid-this
-                func.apply(this, args);
-            }, threshold);
-        } else {
-            last = now;
-// eslint-disable-next-line no-invalid-this
-            func.apply(this, args);
-        }
-    };
-};
+// /**
+//  * Waits until Xms have passed before calling the function again.
+//  * @param {object} func - Function to debounce
+//  * @param {number} wait - Wait for Xms, or 300ms if not provided
+//  * @return {function(...[*]=)}
+//  */
+// const debounce = (func, wait = 300) => {
+//     let timeout = null;
+//
+//     return (...args) => {
+//         clearTimeout(timeout);
+//
+//         timeout = setTimeout(() => {
+//             timeout = null;
+// // eslint-disable-next-line no-invalid-this
+//             func.apply(this, args);
+//         }, wait);
+//     };
+// };
+//
+// /**
+//  * Only call this function at most Xms
+//  * @param {object} func - The function to call
+//  * @param {number} threshold - The number of minimum ms to pass before next execution
+//  * @return {function(...[*]=)}
+//  */
+// const throttle = (func, threshold = 250) => {
+//     let last = null;
+//     let deferTimer = null;
+//
+//     return (...args) => {
+//         const now = +new Date();
+//
+//         if (last && now < last + threshold) {
+//             clearTimeout(deferTimer);
+//
+//             deferTimer = setTimeout(() => {
+//                 last = now;
+// // eslint-disable-next-line no-invalid-this
+//                 func.apply(this, args);
+//             }, threshold);
+//         } else {
+//             last = now;
+// // eslint-disable-next-line no-invalid-this
+//             func.apply(this, args);
+//         }
+//     };
+// };
 
 /**
  * Formats the input so it's consistently two decimals

@@ -10,10 +10,11 @@ const roundToTwoDecimals = (thisNumber, missing) => {
 
 /**
  * Gets value from clicked element in dropdown and sets the corresponding dataset.id
+ * @param {object} e - The event object that triggered this call.
  * @param {object} obj - Object (input-field) to be updated with data.
  */
-const get = (obj) => {
-    const target = event.target;
+const get = (e, obj) => {
+    const target = e.target;
     const city = target.dataset.id;
 
     obj.value = target.innerText;

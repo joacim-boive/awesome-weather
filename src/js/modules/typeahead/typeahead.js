@@ -25,16 +25,26 @@ typeahead.init = (EE) => {
     // It's needed for PurifyCSS so the CSS isn't removed.
     autosuggest.removeChild(autosuggest.firstElementChild);
 
-    submit.addEventListener('click', submitQuery.bind(this, EE));
+    submit.addEventListener('click', debounce((event) => {
+        submitQuery.apply(this, [event, EE]);
+    }, 300));
+    // , submitQuery.bind(this, EE));
 
 // Need to do mousedown, instead of click, to prevent race condition with the blur event.
-    autosuggest.addEventListener('mousedown', get.bind(this, query));
+    autosuggest.addEventListener('mousedown', debounce((event) => {
+        get.apply(this, [event, query]);
+    }, 300));
+    // , get.bind(this, query));
 
     query.addEventListener('keyup', debounce((event) => {
         getAutosuggest.apply(this, [event, autosuggest]);
     }, 300));
 
-    query.addEventListener('blur', toggler.bind(this, autosuggest));
+    query.addEventListener('blur', debounce((event) => {
+        toggler.apply(this, [event, autosuggest]);
+    }));
+    // , toggler.bind(this, autosuggest));
+
     query.addEventListener('focus', () => {
         autosuggest.removeAttribute('hidden');
     });
@@ -50,8 +60,8 @@ const render = (cities, output) => {
     `;
 };
 
-const toggler = (obj) => {
-    if (event.target.value) {
+const toggler = (e, obj) => {
+    if (e.target.value) {
         toggleVisible(obj);
     }
 };
@@ -73,10 +83,10 @@ const getAutosuggest = (e, obj) => {
     }
 };
 
-const submitQuery = (EE) => {
+const submitQuery = (e, EE) => {
     const id = query.dataset.id;
 
-    event.preventDefault();
+    e.preventDefault();
 
     data(conf.PROXY + '/weather/' + id).then((result) => {
         EE.emit('weatherData', result);

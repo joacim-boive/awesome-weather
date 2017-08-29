@@ -120,10 +120,10 @@ module.exports = (env) => {
             new ExtractTextPlugin('styles.[name].[hash].css'),
             ifProd(new PurifyCSSPlugin({
                 // Give paths to parse for rules. These should be absolute!
-                paths: glob.sync(`${PATHS.src}/**/*.html`, { nodir: true }),
+                paths: glob.sync(`${PATHS.src}/**/*.html`, {nodir: true}),
                 verbose: true
             })),
-            ifProd(new BundleAnalyzerPlugin()),
+            // ifProd(new BundleAnalyzerPlugin()),
             ifNotProd(new webpack.NamedModulesPlugin())
         ])
     };

@@ -140,6 +140,7 @@ If you run a local Node instance you need to have mongo-server running in Docker
 * [eventemitter3](https://www.npmjs.com/package/eventemitter3) - For an easy pub/sub architecture
 * [hyperhtml](https://www.npmjs.com/package/hyperhtml) - For doing that virtualdom thing simple and fast!
 * [list.js](https://www.npmjs.com/package/list.js) - It's Swedish! (and great! ;)
+* [lodash](https://lodash.com) - Contains tons of useful functions - no need to reinvent the wheel.
     
 ... And lots of coffee...
 
@@ -154,6 +155,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## TODO
 
+* Production builds doesn't work in Safari 10
+  * It's a [bug in Safari](https://bugs.webkit.org/show_bug.cgi?id=171041)
+  * Can be fixed by [implementing --mangle safari10=true](https://github.com/mishoo/UglifyJS2/issues/1753)
 * Add NGINX to the docker setup and serve the static files thru there.
   * We could use Node, but NGINX is way faster and more efficient.
 * Add support for debugging of node under Docker.

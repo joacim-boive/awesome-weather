@@ -1,17 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "./scripts/deploy.sh",
     "prebuild": "rimraf dist",
     "build": "webpack --env.prod",
     "prebuild:dev": "rimraf dist",
     "build:dev": "webpack --env.dev",
     "start": "http-server dist",
     "dev": "webpack-dev-server --env.dev --hot",
-    "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug",
-    "debug:dev": "npm run debug -- --env.dev",
-    "debug:prod": "npm run debug -- --env.prod",
     "test": "karma start",
     "watch:test": "npm test -- --auto-watch --no-single-run",
     "validate": "npm-run-all --parallel lint build test",

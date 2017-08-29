@@ -161,7 +161,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Webpack
   * Implement
     * autoprefixer
+    * error handling
     * preload-webpack-plugin
     * compression-webpack-plugin
     * CommonsChunkPlugin
-    * Tree-shaking
+    * fast-memoize on the server side

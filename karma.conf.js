@@ -10,7 +10,6 @@ module.exports = (config) => {
         basePath: '',
         frameworks: ['mocha', 'chai'],
         files: [testGlob, srcGlob],
-        exclude: ['src/bootstrap.js'],
         preprocessors: {
             [testGlob]: ['webpack'],
             [srcGlob]: ['webpack']
@@ -51,7 +50,7 @@ module.exports = (config) => {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: false,
-        browsers: ['Chrome'],
+        browsers: ['Safari','Chrome','Firefox'],
         singleRun: true,
         concurrency: Infinity
     });

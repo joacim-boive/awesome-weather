@@ -38,14 +38,14 @@ module.exports = (config) => {
                     statements: 11,
                     branches: 0,
                     functions: 0,
-                    lines: 11
+                    lines: 11,
                 }
             },
             reporters: [
                 {type: 'lcov', dir: 'coverage/', subdir: '.'},
                 {type: 'json', dir: 'coverage/', subdir: '.'},
-                {type: 'text-summary'}
-            ]
+                {type: 'text-summary'},
+            ],
         },
         port: 9876,
         colors: true,

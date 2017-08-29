@@ -1,53 +1,4 @@
 /**
- * Waits until Xms have passed before calling the function again.
- * @param {object} func - Function to debounce
- * @param {number} wait - Wait for Xms, or 300ms if not provided
- * @return {function(...[*]=)}
- */
-const debounce = (func, wait = 300) => {
-    let timeout = null;
-
-    return (...args) => {
-        clearTimeout(timeout);
-
-        timeout = setTimeout(() => {
-            timeout = null;
-// eslint-disable-next-line no-invalid-this
-            func.apply(this, args);
-        }, wait);
-    };
-};
-
-/**
- * Only call this function at most Xms
- * @param {object} func - The function to call
- * @param {number} threshold - The number of minimum ms to pass before next execution
- * @return {function(...[*]=)}
- */
-const throttle = (func, threshold = 250) => {
-    let last = null;
-    let deferTimer = null;
-
-    return (...args) => {
-        const now = +new Date();
-
-        if (last && now < last + threshold) {
-            clearTimeout(deferTimer);
-
-            deferTimer = setTimeout(() => {
-                last = now;
-// eslint-disable-next-line no-invalid-this
-                func.apply(this, args);
-            }, threshold);
-        } else {
-            last = now;
-// eslint-disable-next-line no-invalid-this
-            func.apply(this, args);
-        }
-    };
-};
-
-/**
  * Formats the input so it's consistently two decimals
  * @param {string|number} thisNumber - The number to be formatted
  * @param {string} missing - The text to return if thisNumber is undefined
@@ -59,20 +10,15 @@ const roundToTwoDecimals = (thisNumber, missing) => {
 
 /**
  * Gets value from clicked element in dropdown and sets the corresponding dataset.id
- * @param {object} e - Event that triggers function
+ * @param {object} e - The event object that triggered this call.
+ * @param {object} obj - Object (input-field) to be updated with data.
  */
-const get = function (e) {
-    // Needs to be "old-school" function (not =>) to preserve this-behaviour
-
-    // eslint-disable-next-line no-invalid-this
-    const that = this;
+const get = (e, obj) => {
     const target = e.target;
     const city = target.dataset.id;
 
-    // helpers.toggleVisible(target.parentElement);
-    console.info(city);
-    that.value = target.innerText;
-    that.dataset.id = city;
+    obj.value = target.innerText;
+    obj.dataset.id = city;
 };
 
 /**
@@ -81,7 +27,7 @@ const get = function (e) {
  * @param {object} obj - Object to toggle
  */
 const toggleVisible = (obj) => {
-    setTimeout(function() {
+    setTimeout(function () {
         obj.hasAttribute('hidden') ? obj.removeAttribute('hidden') : obj.setAttribute('hidden', 'true');
     }, 0);
 };
@@ -93,27 +39,45 @@ const toggleVisible = (obj) => {
  * @param {string} url
  * @return {Promise.<TResult>}
  */
-const data = (url) => {
-    const request = new Request(url, {
-        method: 'GET',
-        mode: 'cors',
-        redirect: 'follow',
-        headers: new Headers({
-            'Content-Type': 'text'
-        })
-    });
+const data = (() => {
+    const cache = new Map();
 
-    return fetch(request).then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw Error(response.statusText);
+    const get = (url) => {
+        let thisData = cache.get(url);
+
+        if (thisData) {
+            return new Promise((resolve) => {
+                resolve(thisData);
+            });
         }
-    }).then((json) => {
-        return json;
-    }).catch((error) => {
-        console.error(error);
-    });
-};
 
-export {get, toggleVisible, data, roundToTwoDecimals, debounce, throttle};
+        const request = new Request(url, {
+            method: 'GET',
+            mode: 'cors',
+            redirect: 'follow',
+            headers: new Headers({
+                'Content-Type': 'text'
+            })
+        });
+
+        return fetch(request).then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw Error(response.statusText);
+            }
+        }).then((json) => {
+            cache.set(url, json);
+
+            return json;
+        }).catch((error) => {
+            console.error(error);
+        });
+    };
+
+    return {
+        get: get
+    };
+})();
+
+export {get, toggleVisible, data, roundToTwoDecimals};

@@ -21,6 +21,8 @@ typeahead.init = (EE) => {
     const autosuggest = document.getElementById('autosuggest');
     const query = document.getElementById('query');
 
+    const cache = new Map();
+
     // This is only hear to remove the placeholder LI-element.
     // It's needed for PurifyCSS so the CSS isn't removed.
     autosuggest.removeChild(autosuggest.firstElementChild);
@@ -40,7 +42,7 @@ typeahead.init = (EE) => {
     // , get.bind(this, query));
 
     query.addEventListener('keyup', debounce((event) => {
-        getAutosuggest.apply(this, [event, autosuggest]);
+        getAutosuggest.apply(this, [event, autosuggest, cache]);
     }, 300));
 
     query.addEventListener('blur', debounce((event) => {
@@ -69,16 +71,37 @@ const toggler = (e, obj) => {
     }
 };
 
-const getAutosuggest = (e, obj) => {
+const getAutosuggest = async (e, obj, cache) => {
     const search = e.target.value;
-    const getData = () => {
-        data(conf.PROXY + '/typeahead/' + search).then((result) => {
-            render(result, obj);
-        });
+
+    let thisData = '';
+
+    const getData = async () => {
+        let result = cache.get(search);
+
+        if (!result) {
+            try {
+                result = await data(conf.PROXY + '/typeahead/' + search);
+            } catch (e) {
+                console.error(e);
+            }
+
+            if (result) {
+                cache.set(search, result);
+            }
+        }
+
+        return result;
     };
 
     if (search.length > 3) {
-        getData();
+        thisData = await getData();
+
+        if (thisData) {
+            render(thisData, obj);
+        } else {
+            console.error('We seem to have a problem - is the server started?');
+        }
     }
 
     if (search.length < 4) {
@@ -89,7 +112,7 @@ const getAutosuggest = (e, obj) => {
 const submitQuery = (e, EE) => {
     const id = query.dataset.id;
 
-    e.preventDefault();
+    e.preventDefault(); // Only needed for type="submit"
 
     data(conf.PROXY + '/weather/' + id).then((result) => {
         EE.emit('weatherData', result);

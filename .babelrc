@@ -10,7 +10,7 @@
             "safari >= 10"
           ]
         },
-        "debug": true,
+        "debug": false,
         "loose": true,
         "modules": false,
         "useBuiltIns": true

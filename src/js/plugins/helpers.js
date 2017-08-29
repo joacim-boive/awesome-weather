@@ -27,7 +27,7 @@ const get = (e, obj) => {
  * @param {object} obj - Object to toggle
  */
 const toggleVisible = (obj) => {
-    setTimeout(function() {
+    setTimeout(function () {
         obj.hasAttribute('hidden') ? obj.removeAttribute('hidden') : obj.setAttribute('hidden', 'true');
     }, 0);
 };
@@ -39,27 +39,45 @@ const toggleVisible = (obj) => {
  * @param {string} url
  * @return {Promise.<TResult>}
  */
-const data = (url) => {
-    const request = new Request(url, {
-        method: 'GET',
-        mode: 'cors',
-        redirect: 'follow',
-        headers: new Headers({
-            'Content-Type': 'text'
-        })
-    });
+const data = (() => {
+    const cache = new Map();
 
-    return fetch(request).then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw Error(response.statusText);
+    const get = (url) => {
+        let thisData = cache.get(url);
+
+        if (thisData) {
+            return new Promise((resolve) => {
+                resolve(thisData);
+            });
         }
-    }).then((json) => {
-        return json;
-    }).catch((error) => {
-        console.error(error);
-    });
-};
 
-export { get, toggleVisible, data, roundToTwoDecimals };
+        const request = new Request(url, {
+            method: 'GET',
+            mode: 'cors',
+            redirect: 'follow',
+            headers: new Headers({
+                'Content-Type': 'text'
+            })
+        });
+
+        return fetch(request).then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw Error(response.statusText);
+            }
+        }).then((json) => {
+            cache.set(url, json);
+
+            return json;
+        }).catch((error) => {
+            console.error(error);
+        });
+    };
+
+    return {
+        get: get
+    };
+})();
+
+export {get, toggleVisible, data, roundToTwoDecimals};

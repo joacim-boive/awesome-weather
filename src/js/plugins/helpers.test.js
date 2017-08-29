@@ -1,7 +1,7 @@
 import * as helpers from './helpers';
 
 describe('helpers', () => {
-    describe('roundToTwoDecimals', () => {
+    context('roundToTwoDecimals', () => {
         it('should always return two decimals', () => {
             expect(helpers.roundToTwoDecimals(2, '')).to.equal('2.00');
             expect(helpers.roundToTwoDecimals(2.1, '')).to.equal('2.10');

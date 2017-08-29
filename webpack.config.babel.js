@@ -34,7 +34,7 @@ module.exports = (env) => {
         },
         // devtool: 'source-map', For CSS source-maps to work
         // devtool: 'eval-source-map' for JS source-maps to work - this is triggered for dev-server.
-        devtool: env.dev ? 'eval-source-map' : 'source-map',
+        devtool: ifNotProd('eval-source-map', 'source-map'),
         module: {
             rules: [
                 {
@@ -123,7 +123,7 @@ module.exports = (env) => {
                 paths: glob.sync(`${PATHS.src}/**/*.html`, { nodir: true }),
                 verbose: true
             })),
-            new BundleAnalyzerPlugin(),
+            ifProd(new BundleAnalyzerPlugin()),
             ifNotProd(new webpack.NamedModulesPlugin())
         ])
     };

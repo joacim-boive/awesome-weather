@@ -21,8 +21,6 @@ typeahead.init = (EE) => {
     const autosuggest = document.getElementById('autosuggest');
     const query = document.getElementById('query');
 
-    const cache = new Map();
-
     // This is only hear to remove the placeholder LI-element.
     // It's needed for PurifyCSS so the CSS isn't removed.
     autosuggest.removeChild(autosuggest.firstElementChild);
@@ -38,12 +36,18 @@ typeahead.init = (EE) => {
 // Need to do mousedown, instead of click, to prevent race condition with the blur event.
     autosuggest.addEventListener('mousedown', debounce((event) => {
         get.apply(this, [event, query]);
-    }, 300));
+    }, 300, {
+        leading: true,
+        trailing: false
+    }));
     // , get.bind(this, query));
 
     query.addEventListener('keyup', debounce((event) => {
-        getAutosuggest.apply(this, [event, autosuggest, cache]);
-    }, 300));
+        getAutosuggest.apply(this, [event, autosuggest]);
+    }, 300, {
+        leading: true,
+        trailing: false
+    }));
 
     query.addEventListener('blur', debounce((event) => {
         toggler.apply(this, [event, autosuggest]);
@@ -71,37 +75,16 @@ const toggler = (e, obj) => {
     }
 };
 
-const getAutosuggest = async (e, obj, cache) => {
+const getAutosuggest = (e, obj) => {
     const search = e.target.value;
-
-    let thisData = '';
-
-    const getData = async () => {
-        let result = cache.get(search);
-
-        if (!result) {
-            try {
-                result = await data(conf.PROXY + '/typeahead/' + search);
-            } catch (e) {
-                console.error(e);
-            }
-
-            if (result) {
-                cache.set(search, result);
-            }
-        }
-
-        return result;
+    const getData = () => {
+        data.get(conf.PROXY + '/typeahead/' + search).then((result) => {
+            render(result, obj);
+        });
     };
 
     if (search.length > 3) {
-        thisData = await getData();
-
-        if (thisData) {
-            render(thisData, obj);
-        } else {
-            console.error('We seem to have a problem - is the server started?');
-        }
+        getData();
     }
 
     if (search.length < 4) {
@@ -112,9 +95,9 @@ const getAutosuggest = async (e, obj, cache) => {
 const submitQuery = (e, EE) => {
     const id = query.dataset.id;
 
-    e.preventDefault(); // Only needed for type="submit"
+    e.preventDefault();
 
-    data(conf.PROXY + '/weather/' + id).then((result) => {
+    data.get(conf.PROXY + '/weather/' + id).then((result) => {
         EE.emit('weatherData', result);
     });
 };

@@ -13,7 +13,7 @@ module.exports = (config) => {
         exclude: ['src/bootstrap.js'],
         preprocessors: {
             [testGlob]: ['webpack'],
-            [srcGlob]: ['webpack'],
+            [srcGlob]: ['webpack']
         },
         webpack: webpackConfig,
         webpackMiddleware: {noInfo: true},
@@ -39,7 +39,7 @@ module.exports = (config) => {
                     branches: 0,
                     functions: 0,
                     lines: 11,
-                },
+                }
             },
             reporters: [
                 {type: 'lcov', dir: 'coverage/', subdir: '.'},

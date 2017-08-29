@@ -1,3 +1,6 @@
+'use strict';
+export { table };
+
 import * as hyperHTML from 'hyperhtml';
 import * as List from 'list.js';
 
@@ -43,4 +46,3 @@ const render = (data) => {
     });
 };
 
-export { table };

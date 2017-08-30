@@ -9,6 +9,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const {resolve} = require('path');
@@ -123,8 +124,9 @@ module.exports = (env) => {
                 paths: glob.sync(`${PATHS.src}/**/*.html`, {nodir: true}),
                 verbose: true
             })),
-            // ifProd(new BundleAnalyzerPlugin()),
-            ifNotProd(new webpack.NamedModulesPlugin())
+            ifProd(new BundleAnalyzerPlugin()),
+            ifNotProd(new webpack.NamedModulesPlugin()),
+            new DashboardPlugin()
         ])
     };
     if (env.debug) {

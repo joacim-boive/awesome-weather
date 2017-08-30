@@ -1,5 +1,7 @@
 # Awesome Weather 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/joacim-boive/awesome-weather.svg?token=487c50a15601366146d29d12b0a857bb26f0b55b4582785910908beda64666c4&ts=1504098495351)](https://greenkeeper.io/)
+
 Get your daily weather fix in a fast and easy to use way!
 
 

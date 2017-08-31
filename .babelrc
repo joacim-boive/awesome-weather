@@ -10,7 +10,7 @@
         },
         "debug": false,
         "loose": true,
-        "modules": "commonjs",
+        "modules": false,
         "useBuiltIns": true
       }
     ]
@@ -19,6 +19,7 @@
     "test": {
       "plugins": [
         [
+          "transform-es2015-modules-commonjs",
           "__coverage__",
           {
             "ignore": "*.+(test|stub).*"

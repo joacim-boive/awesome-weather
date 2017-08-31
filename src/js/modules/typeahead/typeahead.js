@@ -1,5 +1,4 @@
 'use strict';
-export { typeahead };
 
 /* eslint-disable no-invalid-this */
 
@@ -104,3 +103,5 @@ const submitQuery = (e, EE) => {
         EE.emit('weatherData', result);
     });
 };
+
+export { typeahead };

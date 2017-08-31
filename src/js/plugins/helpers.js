@@ -6,7 +6,7 @@
  * @param {string} missing - The text to return if thisNumber is undefined
  * @return {string}
  */
-const roundToTwoDecimals = (thisNumber, missing) => {
+const roundToTwoDecimals = (thisNumber, missing = '--') => {
     return thisNumber ? parseFloat(Math.round(thisNumber * 100) / 100).toFixed(2) : missing;
 };
 

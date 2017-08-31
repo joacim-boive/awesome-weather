@@ -7,7 +7,7 @@
     "build:dev": "webpack --env.dev",
     "start": "http-server dist",
     "dev": "webpack-dev-server --env.dev --hot",
-    "test:jest": "jest --no-cache",
+    "test:jest": "jest",
     "test:karma": "karma start",
     "watch:test": "npm test -- --auto-watch --no-single-run",
     "validate": "npm-run-all --parallel lint build test",
@@ -15,13 +15,14 @@
   },
   "jest": {
     "verbose": true,
+    "testEnvironment": "node",
     "transform": {
       ".js$": "babel-jest"
     },
-      "moduleNameMapper": {
-        "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/cfg/mocks/file-mock.js",
-        "^.+\\.(css|scss)$": "<rootDir>/cfg/mocks/style-mock.js"
-      }
+    "moduleNameMapper": {
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/cfg/mocks/file-mock.js",
+      "^.+\\.(css|scss)$": "<rootDir>/cfg/mocks/style-mock.js"
+    }
   },
   "dependencies": {
     "bootstrap": "4.0.0-beta",
@@ -39,6 +40,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-__coverage__": "^11.0.0",
     "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
     "cpy-cli": "^1.0.1",
@@ -53,7 +55,7 @@
     "http-server": "^0.10.0",
     "inline-manifest-webpack-plugin": "^3.0.1",
     "jest": "^20.0.4",
-    "jest-webpack": "^0.3.0",
+    "jest-cli": "^20.0.4",
     "karma": "^1.7.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",

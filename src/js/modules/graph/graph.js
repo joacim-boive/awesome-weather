@@ -1,5 +1,4 @@
 'use strict';
-export { graph };
 
 import * as format from 'date-fns/format';
 import * as Chart from 'chart.js/dist/Chart'; // path required, otherwise Moment.js is included as well
@@ -99,3 +98,5 @@ const sanitize = (data) => {
 
     render.draw(config);
 };
+
+export { graph };

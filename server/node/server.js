@@ -35,10 +35,10 @@ It will cause a stack overflow, as cache is specified in one of the routes alrea
 Remove the particular caching for that route in case of enabling global caching.
  */
 
-// , cache('10 minutes'),
+
 app.get('/api/weather/:query', cache('10 minutes'), weather.query);
 
-app.get('/api/typeahead/:query', cache('10 minutes'), typeahead.query);
+app.get('/api/typeahead/:query', cache('1 day'), typeahead.query);
 
 
 // add route to display cache index

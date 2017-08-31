@@ -1,3 +1,5 @@
+'use strict';
+
 import * as hyperHTML from 'hyperhtml';
 import * as List from 'list.js';
 

@@ -1,6 +1,6 @@
 process.env.BABEL_ENV = 'test';
 const webpackEnv = {test: true};
-const webpackConfig = require('./webpack.config.babel')(webpackEnv);
+const webpackConfig = require('./webpack.config')(webpackEnv);
 
 const testGlob = 'src/**/*.test.js';
 const srcGlob = 'src/**/!(*.test|*.stub).js';
@@ -10,7 +10,6 @@ module.exports = (config) => {
         basePath: '',
         frameworks: ['mocha', 'chai'],
         files: [testGlob, srcGlob],
-        exclude: ['src/bootstrap.js'],
         preprocessors: {
             [testGlob]: ['webpack'],
             [srcGlob]: ['webpack']
@@ -51,7 +50,7 @@ module.exports = (config) => {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: false,
-        browsers: ['Chrome'],
+        browsers: ['Safari','Chrome','Firefox'],
         singleRun: true,
         concurrency: Infinity
     });

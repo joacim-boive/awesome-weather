@@ -9,6 +9,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const PurifyCSSPlugin = require('purifycss-webpack');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const {resolve} = require('path');
@@ -25,11 +26,11 @@ const PATHS = {
 module.exports = (env) => {
     const {ifProd, ifNotProd} = getIfUtils(env);
     const config = {
-        context: resolve('src'),
+        context: PATHS.src ,
         entry: './js/index/index.js',
         output: {
             filename: 'bundle.[name].[hash].js',
-            path: resolve('dist'),
+            path: PATHS.dist,
             pathinfo: ifNotProd()
         },
         // devtool: 'source-map', For CSS source-maps to work
@@ -120,15 +121,15 @@ module.exports = (env) => {
             new ExtractTextPlugin('styles.[name].[hash].css'),
             ifProd(new PurifyCSSPlugin({
                 // Give paths to parse for rules. These should be absolute!
-                paths: glob.sync(`${PATHS.src}/**/*.html`, { nodir: true }),
+                paths: glob.sync(`${PATHS.src}/**/*.html`, {nodir: true}),
                 verbose: true
             })),
             ifProd(new BundleAnalyzerPlugin()),
-            ifNotProd(new webpack.NamedModulesPlugin())
+            ifNotProd(new webpack.NamedModulesPlugin()),
+            new DashboardPlugin()
         ])
     };
     if (env.debug) {
-        console.log(config);
         debugger // eslint-disable-line
     }
 

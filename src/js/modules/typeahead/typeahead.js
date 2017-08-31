@@ -1,3 +1,5 @@
+'use strict';
+
 /* eslint-disable no-invalid-this */
 
 import {conf} from '../../conf';
@@ -102,4 +104,4 @@ const submitQuery = (e, EE) => {
     });
 };
 
-export {typeahead};
+export { typeahead };

@@ -5,12 +5,10 @@
       {
         "targets": {
           "browsers": [
-            "chrome >= 60",
-            "firefox >= 55",
-            "safari >= 10"
+            "chrome >= 60"
           ]
         },
-        "debug": true,
+        "debug": false,
         "loose": true,
         "modules": false,
         "useBuiltIns": true
@@ -21,6 +19,7 @@
     "test": {
       "plugins": [
         [
+          "transform-es2015-modules-commonjs",
           "__coverage__",
           {
             "ignore": "*.+(test|stub).*"

@@ -1,78 +1,85 @@
 {
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "./scripts/deploy.sh",
     "prebuild": "rimraf dist",
     "build": "webpack --env.prod",
     "prebuild:dev": "rimraf dist",
     "build:dev": "webpack --env.dev",
     "start": "http-server dist",
     "dev": "webpack-dev-server --env.dev --hot",
-    "debug": "node-nightly --inspect --debug-brk node_modules/.bin/webpack --env.debug",
-    "debug:dev": "npm run debug -- --env.dev",
-    "debug:prod": "npm run debug -- --env.prod",
-    "test": "karma start",
+    "test:jest": "jest",
+    "test:karma": "karma start",
     "watch:test": "npm test -- --auto-watch --no-single-run",
     "validate": "npm-run-all --parallel lint build test",
     "lint": "eslint ."
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node",
+    "transform": {
+      ".js$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/cfg/mocks/file-mock.js",
+      "^.+\\.(css|scss)$": "<rootDir>/cfg/mocks/style-mock.js"
+    }
   },
   "dependencies": {
     "bootstrap": "4.0.0-beta",
     "chart.js": "^2.6.0",
     "date-fns": "^1.28.5",
     "eventemitter3": "^2.0.3",
-    "hyperhtml": "^1.3.0",
+    "hyperhtml": "^1.5.1",
     "list.js": "^1.5.0",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "webpack": "^3.5.5",
-    "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-config-utils": "^2.3.0",
-    "webpack-dev-server": "^2.7.1",
-
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-__coverage__": "^11.0.0",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-
+    "chai": "^4.1.1",
+    "cpy-cli": "^1.0.1",
+    "css-loader": "^0.28.5",
     "eslint": "^4.5.0",
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^1.9.0",
-
-    "html-loader": "^0.5.1",
-    "css-loader": "^0.28.5",
-    "style-loader": "^0.18.2",
-
-    "uglifyjs-webpack-plugin": "v1.0.0-beta.2",
     "extract-text-webpack-plugin": "^3.0.0",
-    "inline-manifest-webpack-plugin": "^3.0.1",
-    "optimize-css-assets-webpack-plugin": "^3.1.1",
+    "glob": "^7.1.2",
+    "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
-    "offline-plugin": "^4.8.3",
-    "progress-bar-webpack-plugin": "^1.10.0",
-
-    "chai": "^4.1.1",
-    "mocha": "^3.5.0",
+    "http-server": "^0.10.0",
+    "inline-manifest-webpack-plugin": "^3.0.1",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
     "karma": "^1.7.0",
-    "karma-mocha": "^1.3.0",
-    "karma-webpack": "^2.0.4",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",
-    "karma-safari-launcher": "^1.0.0",
-    "karma-firefox-launcher": "^1.0.1",
     "karma-coverage": "^1.1.1",
-
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.4",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-webpack": "^2.0.4",
+    "mocha": "^3.5.0",
+    "npm-run-all": "^4.1.1",
+    "offline-plugin": "^4.8.3",
+    "opt-cli": "^1.5.2",
+    "optimize-css-assets-webpack-plugin": "^3.1.1",
+    "progress-bar-webpack-plugin": "^1.10.0",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
-
-    "glob": "^7.1.2",
-    "cpy-cli": "^1.0.1",
-    "http-server": "^0.10.0",
     "rimraf": "^2.6.1",
-    "opt-cli": "^1.5.2",
-    "npm-run-all": "^4.0.2"
+    "style-loader": "^0.18.2",
+    "uglifyjs-webpack-plugin": "v1.0.0-beta.2",
+    "webpack": "^3.5.5",
+    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-config-utils": "^2.3.0",
+    "webpack-dashboard": "^1.0.0-5",
+    "webpack-dev-server": "^2.7.1"
   }
 }

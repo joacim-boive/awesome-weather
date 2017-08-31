@@ -26,11 +26,11 @@ const PATHS = {
 module.exports = (env) => {
     const {ifProd, ifNotProd} = getIfUtils(env);
     const config = {
-        context: resolve('src'),
+        context: PATHS.src ,
         entry: './js/index/index.js',
         output: {
             filename: 'bundle.[name].[hash].js',
-            path: resolve('dist'),
+            path: PATHS.dist,
             pathinfo: ifNotProd()
         },
         // devtool: 'source-map', For CSS source-maps to work
@@ -130,7 +130,6 @@ module.exports = (env) => {
         ])
     };
     if (env.debug) {
-        console.log(config);
         debugger // eslint-disable-line
     }
 

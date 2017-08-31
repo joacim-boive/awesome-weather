@@ -7,10 +7,21 @@
     "build:dev": "webpack --env.dev",
     "start": "http-server dist",
     "dev": "webpack-dev-server --env.dev --hot",
-    "test": "karma start",
+    "test:jest": "jest --no-cache",
+    "test:karma": "karma start",
     "watch:test": "npm test -- --auto-watch --no-single-run",
     "validate": "npm-run-all --parallel lint build test",
     "lint": "eslint ."
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {
+      ".js$": "babel-jest"
+    },
+      "moduleNameMapper": {
+        "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/cfg/mocks/file-mock.js",
+        "^.+\\.(css|scss)$": "<rootDir>/cfg/mocks/style-mock.js"
+      }
   },
   "dependencies": {
     "bootstrap": "4.0.0-beta",
@@ -24,8 +35,10 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-__coverage__": "^11.0.0",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
     "babel-preset-env": "^1.6.0",
     "chai": "^4.1.1",
     "cpy-cli": "^1.0.1",
@@ -39,6 +52,8 @@
     "html-webpack-plugin": "^2.30.1",
     "http-server": "^0.10.0",
     "inline-manifest-webpack-plugin": "^3.0.1",
+    "jest": "^20.0.4",
+    "jest-webpack": "^0.3.0",
     "karma": "^1.7.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.2.0",

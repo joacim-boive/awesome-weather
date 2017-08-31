@@ -1,5 +1,4 @@
 'use strict';
-export {get, toggleVisible, data, roundToTwoDecimals};
 
 /**
  * Formats the input so it's consistently two decimals
@@ -85,3 +84,5 @@ const data = (() => {
         get: get
     };
 })();
+
+export {get, toggleVisible, data, roundToTwoDecimals};

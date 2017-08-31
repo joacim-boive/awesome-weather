@@ -5,14 +5,12 @@
       {
         "targets": {
           "browsers": [
-            "chrome >= 60",
-            "firefox >= 55",
-            "safari >= 10"
+            "chrome >= 60"
           ]
         },
         "debug": false,
         "loose": true,
-        "modules": false,
+        "modules": "commonjs",
         "useBuiltIns": true
       }
     ]

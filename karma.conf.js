@@ -1,6 +1,6 @@
 process.env.BABEL_ENV = 'test';
 const webpackEnv = {test: true};
-const webpackConfig = require('./webpack.config.babel')(webpackEnv);
+const webpackConfig = require('./webpack.config')(webpackEnv);
 
 const testGlob = 'src/**/*.test.js';
 const srcGlob = 'src/**/!(*.test|*.stub).js';

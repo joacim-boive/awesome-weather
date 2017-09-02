@@ -7,7 +7,7 @@ import {conf} from '../../conf';
 import * as hyperHTML from 'hyperhtml';
 
 import * as debounce from 'lodash/debounce';
-import {toggleVisible, data, get} from '../../plugins/helpers';
+import {data, getSelected} from '../../plugins/helpers';
 
 import './typeahead.css';
 import template from './typeahead.html';
@@ -37,7 +37,10 @@ typeahead.init = (EE) => {
 
 // Need to do mousedown, instead of click, to prevent race condition with the blur event.
     autosuggest.addEventListener('mousedown', debounce((event) => {
-        get.apply(this, [event, query]);
+        const data = getSelected.apply(this, [event]);
+
+        query.dataset.id = data.id;
+        query.value = data.value;
     }, 300, {
         leading: true,
         trailing: false
@@ -71,9 +74,15 @@ const render = (cities, output) => {
     `;
 };
 
+/**
+ * Sets, or removes, the attribute hidden on object
+ * Bootstrap uses this attribute to hide/show in layout.
+ * @param {object} e - eventClick that triggers function call
+ * @param {object} obj - Object to toggle
+ */
 const toggler = (e, obj) => {
     if (e.target.value) {
-        toggleVisible(obj);
+        obj.hasAttribute('hidden') ? obj.removeAttribute('hidden') : obj.setAttribute('hidden', 'true');
     }
 };
 

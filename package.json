@@ -7,15 +7,19 @@
     "build:dev": "webpack --env.dev",
     "start": "http-server dist",
     "dev": "webpack-dev-server --env.dev --hot",
-    "test:jest": "jest",
+    "test": "jest --no-cache",
     "test:karma": "karma start",
-    "watch:test": "npm test -- --auto-watch --no-single-run",
+    "watch:test": "jest --watch",
     "validate": "npm-run-all --parallel lint build test",
     "lint": "eslint ."
   },
   "jest": {
     "verbose": true,
-    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json", "lcov", "text"
+    ],
+    "testEnvironment": "jsdom",
     "transform": {
       ".js$": "babel-jest"
     },

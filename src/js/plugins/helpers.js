@@ -13,28 +13,17 @@ const roundToTwoDecimals = (thisNumber, missing = '--') => {
 /**
  * Gets value from clicked element in dropdown and sets the corresponding dataset.id
  * @param {object} e - The event object that triggered this call.
- * @param {object} obj - Object (input-field) to be updated with data.
- * @return {object} obj -
+ * @return {object} data -
  */
-const get = (e, obj) => {
+const getSelected = (e) => {
     const target = e.target;
-    const city = target.dataset.id;
+    const cityId = target.dataset.id;
+    const data = {};
 
-    obj.value = target.innerText;
-    obj.dataset.id = city;
+    data.value = target.innerText;
+    data.id = cityId;
 
-    return obj;
-};
-
-/**
- * Sets, or removes, the attribute hidden on object
- * Bootstrap uses this attribute to hide/show in layout.
- * @param {object} obj - Object to toggle
- */
-const toggleVisible = (obj) => {
-    setTimeout(function () {
-        obj.hasAttribute('hidden') ? obj.removeAttribute('hidden') : obj.setAttribute('hidden', 'true');
-    }, 0);
+    return data;
 };
 
 /**
@@ -44,7 +33,7 @@ const toggleVisible = (obj) => {
  * @param {string} url
  * @return {Promise.<TResult>}
  */
-const data = (() => {
+const data = ((() => {
     const cache = new Map();
 
     const get = (url) => {
@@ -56,16 +45,7 @@ const data = (() => {
             });
         }
 
-        const request = new Request(url, {
-            method: 'GET',
-            mode: 'cors',
-            redirect: 'follow',
-            headers: new Headers({
-                'Content-Type': 'text'
-            })
-        });
-
-        return fetch(request).then((response) => {
+        return fetch(url).then((response) => {
             if (response.ok) {
                 return response.json();
             } else {
@@ -83,6 +63,6 @@ const data = (() => {
     return {
         get: get
     };
-})();
+})());
 
-export {get, toggleVisible, data, roundToTwoDecimals};
+export {getSelected, data, roundToTwoDecimals};

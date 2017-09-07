@@ -4,26 +4,10 @@
  */
 
 import * as helpers from './helpers';
-
-describe('Test Labbs', () =>{
-    test('Jest Test ', () => {
-        expect();
-    });
-});
+import * as _ from 'lodash';
 
 
 describe('helpers', () => {
-    // const get = (e, obj) => {
-    //     const target = e.target;
-    //     const city = target.dataset.id;
-    //
-    //     obj.value = target.innerText;
-    //     obj.dataset.id = city;
-    //
-    //     return obj;
-    // };
-
-    // const e = new MouseEvent()
     describe('roundToTwoDecimals()', () => {
         it('should always return two decimals', () => {
             expect(helpers.roundToTwoDecimals(2, '')).toBe('2.00');
@@ -35,15 +19,27 @@ describe('helpers', () => {
             expect(helpers.roundToTwoDecimals(undefined, '--')).toBe('--');
         });
 
-        test('Should not throw when no args supplied', () =>{
-            expect(() =>{
+        test('Should not throw when no args supplied', () => {
+            expect(() => {
                 helpers.roundToTwoDecimals()
             }).not.toThrow();
         });
     });
 
-    describe('get', () =>{
+    describe('getSelected', () => {
+        // Replicate the onClickEvent-data.
+        const thisEvent = _.set({}, 'target.dataset.id', '007');
+        thisEvent.target.innerText = 'London';
 
+
+        it('should return an object with matching values', () => {
+            expect(helpers.getSelected(thisEvent)).toEqual({"id": "007", "value": "London"});
+        });
+    });
+
+    describe('data', () => {
+        it('should return an object with the get-property', () => {
+            expect(helpers.data).toHaveProperty("get");
+        });
     })
 });
-

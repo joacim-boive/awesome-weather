@@ -17,7 +17,9 @@
     "verbose": true,
     "collectCoverage": true,
     "coverageReporters": [
-      "json", "lcov", "text"
+      "json",
+      "lcov",
+      "text"
     ],
     "testEnvironment": "jsdom",
     "transform": {
@@ -29,7 +31,7 @@
     }
   },
   "dependencies": {
-    "bootstrap": "4.0.0-beta",
+    "bootstrap": "4.0.0",
     "chart.js": "^2.6.0",
     "date-fns": "^1.28.5",
     "eventemitter3": "^2.0.3",
